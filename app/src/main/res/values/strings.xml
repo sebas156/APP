@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">IronAthlete</string>
+    <string name="user_email">Correo electronico</string>
+    <string name="Icon_description">Icono</string>
+    <string name="password2">Contrasena</string>
+    <string name="Create_Account">Crear Cuenta</string>
+    <string name="Sign_in">Iniciar Sesion</string>
+    <string name="Repassword">Repetir contraseña</string>
+    <string name="sign_out">Cerrar Sesion</string>
+</resources>

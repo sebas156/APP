@@ -1,11 +1,12 @@
-package com.example.ironathlete
+package com.example.ironathlete.ui.registro
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.util.Patterns
 import android.widget.Toast
 import com.example.ironathlete.databinding.ActivityRegistroBinding
+import com.example.ironathlete.ui.login.LoginActivity
 import java.util.regex.Pattern
 
 

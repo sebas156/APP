@@ -1,9 +1,11 @@
-package com.example.ironathlete
+package com.example.ironathlete.ui.login
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.example.ironathlete.ui.main.MainActivity
+import com.example.ironathlete.ui.registro.RegistroActivity
 import com.example.ironathlete.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {

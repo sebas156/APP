@@ -1,12 +1,14 @@
-package com.example.ironathlete
+package com.example.ironathlete.ui.main
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import com.example.ironathlete.R
 import com.example.ironathlete.databinding.ActivityMainBinding
+import com.example.ironathlete.ui.login.LoginActivity
 
 class MainActivity : AppCompatActivity() {
 

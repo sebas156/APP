@@ -10,13 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IronAthlete">
         <activity
-            android:name=".RegistroActivity"
+            android:name=".ui.registro.RegistroActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name="com.example.ironathlete.ui.login.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".SplashActivity"
+            android:name=".ui.splash.SplashActivity"
             android:exported="true"
             android:theme="@style/Splash">
             <intent-filter>
@@ -26,7 +26,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.ironathlete.ui.main.MainActivity"
             android:exported="true" />
     </application>
 

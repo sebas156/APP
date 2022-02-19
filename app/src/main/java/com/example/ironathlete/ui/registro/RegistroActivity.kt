@@ -1,57 +1,60 @@
 package com.example.ironathlete.ui.registro
 
-import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import android.util.Patterns
+import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.example.ironathlete.databinding.ActivityRegistroBinding
-import com.example.ironathlete.ui.login.LoginActivity
-import java.util.regex.Pattern
 
 
 class RegistroActivity : AppCompatActivity() {
 
-    private lateinit var registroBinding : ActivityRegistroBinding
+    private lateinit var registroBinding: ActivityRegistroBinding
+    private lateinit var registroViewModel: RegistroViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         registroBinding = ActivityRegistroBinding.inflate(layoutInflater)
+        registroViewModel = ViewModelProvider(this).get(RegistroViewModel::class.java)
         setContentView(registroBinding.root)
 
-        with(registroBinding){
-            RegistroButton.setOnClickListener{
-                val email = UserEmailTextEdit2.text.toString()
-                val password= passwordTextEdit.text.toString()
-                val repassword = repasswordEditText.text.toString()
+        registroViewModel.msgDone.observe(this, { message ->
+            onMsgDoneSuscribe(message)
+        })
 
+        registroViewModel.dataValidated.observe(this, { result ->
+            onDataValidateSubscribe(result)
+        })
 
-                if(email.isEmpty() || password.isEmpty()){
-                    Toast.makeText(this@RegistroActivity,"Se deben llenar los campos",Toast.LENGTH_SHORT).show()
-                }
-                else if(!validarEmail(email)){
-                    Toast.makeText(this@RegistroActivity,"Correo invalido: Por favor ingresar un correo valido.",Toast.LENGTH_SHORT).show()
-                }
-                else if(password.length < 6){
-                    Toast.makeText(this@RegistroActivity,"Contraseña demasiado corta, debe ser de al menos 6 caracteres.",Toast.LENGTH_SHORT).show()
-                }
-                else if(password != repassword){
-                    Toast.makeText(this@RegistroActivity,"Las contraseñas deben coincidir", Toast.LENGTH_SHORT).show()
-                }
-                else{
-                    val intent = Intent(this@RegistroActivity, LoginActivity::class.java)
-                    intent.putExtra("email1",email)
-                    intent.putExtra("password1",password)
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    startActivity(intent)
-                }
+        with(registroBinding) {
+            RegistroButton.setOnClickListener {
+                registroViewModel.validateFields(
+                    UserEmailTextEdit2.text.toString(),
+                    passwordTextEdit.text.toString(),
+                    repasswordEditText.text.toString()
+                )
             }
         }
 
     }
 
-    private fun validarEmail(email: String): Boolean {
-        val pattern: Pattern = Patterns.EMAIL_ADDRESS
-        return pattern.matcher(email).matches()
+    private fun onDataValidateSubscribe(result: Boolean?) {
+
+        with(registroBinding){
+            Log.d("TAG", UserEmailTextEdit2.text.toString() + " " + passwordTextEdit.text.toString())
+            registroViewModel.saveUser(UserEmailTextEdit2.text.toString(), passwordTextEdit.text.toString())
+        }
+
+
+        /*val intent = Intent(this@RegistroActivity, LoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)*/
+
     }
+
+    private fun onMsgDoneSuscribe(message: String?) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
 }

@@ -4,41 +4,39 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import com.example.ironathlete.ui.main.MainActivity
 import com.example.ironathlete.ui.registro.RegistroActivity
 import com.example.ironathlete.databinding.ActivityLoginBinding
+import com.example.ironathlete.local.userAccount
+import java.sql.Types.NULL
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var loginBinding : ActivityLoginBinding
+    private lateinit var loginViewModel: LoginViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         loginBinding = ActivityLoginBinding.inflate(layoutInflater)
+        loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
         setContentView(loginBinding.root)
 
-        var emailReceived: String?= ""
-        var passwordReceived: String? = ""
+        loginViewModel.msgDone.observe(this, { message ->
+            onMsgDoneSuscribe(message)
+        })
 
-        val credentials =intent.extras
-        if(credentials != null){
-            emailReceived =credentials.getString("email1")
-            passwordReceived =credentials.getString("password1")
-        }
+        loginViewModel.validated.observe(this,{validated ->
+            onValidatedSuscribe(validated)
+        })
+
+        loginViewModel.findUserDone.observe(this,{result ->
+            onFindUserDoneSubscribe(result)
+        })
+
 
         with(loginBinding){
             SignInButton.setOnClickListener{
-                val email = UserEmailEditText.text.toString()
-                val password = UserPasswordEditText.text.toString()
-                if(email== emailReceived && password == passwordReceived && email.isNotEmpty() && password.isNotEmpty()){
-                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                    intent.putExtra("email",email)
-                    intent.putExtra("password",password)
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    startActivity(intent)
-                }
-                else{
-                    Toast.makeText(this@LoginActivity,"Usuario o contraseña incorrecto",Toast.LENGTH_SHORT).show()
-                }
+                loginViewModel.ValidateFields(UserEmailEditText.text.toString(),UserPasswordEditText.text.toString())
             }
 
             RegisterTextView.setOnClickListener {
@@ -46,5 +44,25 @@ class LoginActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         }
+    }
+
+    private fun onValidatedSuscribe(validated: Boolean?) {
+        val intent = Intent(this@LoginActivity, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+    }
+
+    private fun onFindUserDoneSubscribe(result: userAccount?) {
+        with(loginBinding){
+            if (result != null) {
+                loginViewModel.validateAccout(result.email,result.password,UserEmailEditText.text.toString(),UserPasswordEditText.text.toString())
+            }else{
+                Toast.makeText(this@LoginActivity,"El usuario ingresado no se encuentra dentro de nuestra base de datos.",Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun onMsgDoneSuscribe(message: String?) {
+        Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
     }
 }

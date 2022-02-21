@@ -1,11 +1,13 @@
 package com.example.ironathlete.ui.registro
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.ironathlete.databinding.ActivityRegistroBinding
+import com.example.ironathlete.ui.login.LoginActivity
 
 
 class RegistroActivity : AppCompatActivity() {
@@ -46,10 +48,9 @@ class RegistroActivity : AppCompatActivity() {
             registroViewModel.saveUser(UserEmailTextEdit2.text.toString(), passwordTextEdit.text.toString())
         }
 
-
-        /*val intent = Intent(this@RegistroActivity, LoginActivity::class.java)
+        val intent = Intent(this@RegistroActivity, LoginActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        startActivity(intent)*/
+        startActivity(intent)
 
     }
 

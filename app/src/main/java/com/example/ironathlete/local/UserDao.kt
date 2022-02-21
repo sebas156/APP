@@ -8,4 +8,7 @@ interface UserDao {
     @Insert
     suspend fun saveUser(user:userAccount)
 
+    @Query("SELECT * FROM table_users WHERE email LIKE :userEmail")
+    suspend fun searchUser(userEmail:String):userAccount
+
 }

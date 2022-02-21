@@ -1,6 +1,8 @@
 package com.example.ironathlete
 
 import android.app.Application
+import android.util.Log
+import android.widget.Toast
 import androidx.room.Room
 import com.example.ironathlete.local.UserDatabase
 

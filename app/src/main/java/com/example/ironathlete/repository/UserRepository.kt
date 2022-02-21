@@ -17,4 +17,10 @@ class UserRepository {
         val userDao: UserDao = IronAtlheteProject.database.UserDao()
         userDao.saveUser(user)
     }
+
+    suspend fun searchUser(emailUser: String):userAccount{
+        val userDao: UserDao = IronAtlheteProject.database.UserDao()
+        val userFound= userDao.searchUser(emailUser)
+        return userFound
+    }
 }

@@ -7,4 +7,9 @@
     <string name="Sign_in">Iniciar Sesion</string>
     <string name="Repassword">Repetir contraseña</string>
     <string name="sign_out">Cerrar Sesion</string>
+    <string name="title_activity_bottom">BottomActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_muscle">Routine</string>
+    <string name="title_diets">Diet</string>
+    <string name="title_community">People</string>
 </resources>

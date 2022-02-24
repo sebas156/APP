@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.ironathlete.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/muscleFragment"
+        android:name="com.example.ironathlete.ui.muscle.MuscleFragment"
+        android:label="fragment_muscle"
+        tools:layout="@layout/fragment_muscle" />
+    <fragment
+        android:id="@+id/communityFragment"
+        android:name="com.example.ironathlete.ui.comunity.CommunityFragment"
+        android:label="fragment_community"
+        tools:layout="@layout/fragment_community" />
+    <fragment
+        android:id="@+id/dietsFragment"
+        android:name="com.example.ironathlete.ui.diets.DietsFragment"
+        android:label="fragment_diets"
+        tools:layout="@layout/fragment_diets" />
+
+</navigation>

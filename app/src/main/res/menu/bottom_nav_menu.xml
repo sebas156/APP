@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/homeFragment"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/title_home" />
+
+    <item
+        android:id="@+id/muscleFragment"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="@string/title_muscle" />
+
+    <item
+        android:id="@+id/dietsFragment"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="@string/title_diets" />
+    <item
+        android:id="@+id/communityFragment"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="@string/title_community" />
+
+</menu>

@@ -6,15 +6,19 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.example.ironathlete.R
 import com.example.ironathlete.databinding.ActivityMainBinding
 import com.example.ironathlete.ui.login.LoginActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var mainBinding : ActivityMainBinding
-    var emailReceived: String?= ""
-    var passwordReceived: String?=""
+
 
     override fun onBackPressed() {
         super.onBackPressed()
@@ -25,13 +29,18 @@ class MainActivity : AppCompatActivity() {
         mainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mainBinding.root)
 
-        val credentials = intent.extras
-        if(credentials != null){
-            emailReceived = credentials.getString("email")
-            passwordReceived=credentials.getString("password")
-        }
+        val navView: BottomNavigationView = mainBinding.navView
 
-            mainBinding.DisplayEditText.text=emailReceived
+        val navController = findNavController(R.id.nav_host_fragment_activity_bottom)
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.homeFragment, R.id.muscleFragment, R.id.dietsFragment, R.id.communityFragment
+            )
+        )
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
 
 
     }
@@ -50,8 +59,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun goToLoginActivity(){
         val intent = Intent(this, LoginActivity::class.java)
-        intent.putExtra("email1",emailReceived)
-        intent.putExtra("password1",passwordReceived)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
     }

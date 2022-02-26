@@ -16,11 +16,6 @@
             android:name=".ui.bottom.BottomActivity"
             android:exported="true"
             android:label="@string/title_activity_bottom" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".ui.registro.RegistroActivity"
@@ -35,7 +30,13 @@
 
         <activity
             android:name=".ui.main.MainActivity"
-            android:exported="true" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
     </application>
 

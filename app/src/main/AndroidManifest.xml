@@ -3,13 +3,15 @@
     package="com.example.ironathlete">
 
     <application
+
         android:name=".IronAtlheteProject"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.IronAthlete">
+        android:theme="@style/Theme.IronAthlete"
+        >
         <activity
             android:name=".ui.bottom.BottomActivity"
             android:exported="true"
@@ -34,6 +36,7 @@
         <activity
             android:name=".ui.main.MainActivity"
             android:exported="true" />
+
     </application>
 
 </manifest>

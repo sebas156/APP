@@ -13,9 +13,14 @@
         <item name="android:windowContentOverlay">@null</item>
     </style>
     
-    <style name="TextEnesimaMeal">
-        <item name="android:textStyle">italic</item>
+    <style name="TextEnesimaMealTitle">
+        <item name="android:textStyle">bold</item>
         <item name="android:textSize">20sp</item>
-        <item name="android:textColor">@color/black_overlay</item>
+        <item name="android:textColor">#fff</item>
+    </style>
+    <style name="TextEnesimaMealDescription">
+        <item name="android:textStyle">italic</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:textColor">#fff</item>
     </style>
 </resources>

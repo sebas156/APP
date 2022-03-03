@@ -31,7 +31,9 @@ class DietsAdapter (
         private val binding = MealCardItemBinding.bind(itemView)
         fun bind(meal: mealItem){
             with(binding){
-
+                cardBackground.setImageResource(meal.background)
+                cardTitle.text = meal.nameMeal
+                cardDescription.text= "Meal "+meal.numberMeal.toString()
             }
         }
     }

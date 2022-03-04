@@ -21,4 +21,17 @@
     <string name="weight">Peso (kg)</string>
     <string name="height">Estatura (cm)</string>
     <string name="hint_user_name">Nombre y Apellido</string>
+    <string name="male">Hombre</string>
+    <string name="female">Mujer</string>
+    <string name="gender_selector">Sexo</string>
+    <string name="infor_user">INFORMACION DEL USUARIO</string>
+    <string name="time_work_out">HORA DEL ENTRENAMIENTO</string>
+    <string name="formato_hora">hh-mm-ss</string>
+    <string name="gym_available">¿Vas al gimnasio? </string>
+    <string name="afirmative">Si</string>
+    <string name="negative">No</string>
+    <string name="goal">¿Cual es tu objetivo?</string>
+    <string name="bulk">Aumentar masa muscular</string>
+    <string name="shredded">Bajar de peso</string>
+    <string name="save">Guardar</string>
 </resources>

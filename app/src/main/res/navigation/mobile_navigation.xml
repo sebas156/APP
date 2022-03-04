@@ -9,7 +9,11 @@
         android:id="@+id/homeFragment"
         android:name="com.example.ironathlete.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_infoUserFragment"
+            app:destination="@id/infoUserFragment" />
+    </fragment>
     <fragment
         android:id="@+id/muscleFragment"
         android:name="com.example.ironathlete.ui.muscle.MuscleFragment"
@@ -38,5 +42,10 @@
             android:name="mealInformation"
             app:argType="com.example.ironathlete.mealItem" />
     </fragment>
+    <fragment
+        android:id="@+id/infoUserFragment"
+        android:name="com.example.ironathlete.ui.infoUser.InfoUserFragment"
+        android:label="fragment_info_user"
+        tools:layout="@layout/fragment_info_user" />
 
 </navigation>

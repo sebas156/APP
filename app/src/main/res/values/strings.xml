@@ -15,4 +15,10 @@
     <string name="cook">Let´s cook it</string>
     <string name="complete_diet">PLAN NUTRICIONAL</string>
     <string name="title_dish">NOMBRE COMIDA</string>
+    <string name="info_user_indicator">Informacion personal</string>
+    <string name="estadistic_user_indicator">Estadisticas</string>
+    <string name="user_name_title">NOMBRE DE USUARIO</string>
+    <string name="weight">Peso (kg)</string>
+    <string name="height">Estatura (cm)</string>
+    <string name="hint_user_name">Nombre y Apellido</string>
 </resources>

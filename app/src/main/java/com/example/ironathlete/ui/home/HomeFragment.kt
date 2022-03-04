@@ -31,6 +31,14 @@ class HomeFragment : Fragment() {
         with(homeBinding){
            infoImageView.setImageResource(R.drawable.playa)
             stadisticsImageView.setImageResource(R.drawable.ciudad)
+
+            infoUserCardView.setOnClickListener{
+
+            }
+
+            stadisticsCardView.setOnClickListener {
+
+            }
         }
 
     }

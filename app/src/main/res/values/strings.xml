@@ -13,4 +13,6 @@
     <string name="title_diets">Diet</string>
     <string name="title_community">People</string>
     <string name="cook">Let´s cook it</string>
+    <string name="complete_diet">PLAN NUTRICIONAL</string>
+    <string name="title_dish">NOMBRE COMIDA</string>
 </resources>

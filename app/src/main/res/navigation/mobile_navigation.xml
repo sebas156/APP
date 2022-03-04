@@ -24,6 +24,19 @@
         android:id="@+id/dietsFragment"
         android:name="com.example.ironathlete.ui.diets.DietsFragment"
         android:label="fragment_diets"
-        tools:layout="@layout/fragment_diets" />
+        tools:layout="@layout/fragment_diets" >
+        <action
+            android:id="@+id/action_dietsFragment_to_detailMealFragment"
+            app:destination="@id/detailMealFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailMealFragment"
+        android:name="com.example.ironathlete.ui.detailsMeal.DetailMealFragment"
+        android:label="fragment_detail_meal"
+        tools:layout="@layout/fragment_detail_meal" >
+        <argument
+            android:name="mealInformation"
+            app:argType="com.example.ironathlete.mealItem" />
+    </fragment>
 
 </navigation>

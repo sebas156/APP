@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ironathlete.R
 import com.example.ironathlete.databinding.FragmentDietsBinding
@@ -45,11 +47,18 @@ class DietsFragment : Fragment() {
             )
         )
 
-        dietsAdapter= DietsAdapter(dietsList)
+        val manager = LinearLayoutManager(this@DietsFragment.requireContext())
+        val decorator = DividerItemDecoration(this@DietsFragment.requireContext(),manager.orientation)
+        dietsAdapter= DietsAdapter(dietsList) { onItemSelected(it) }
         dietsBinding.DietsAvailables.apply{
-            layoutManager = LinearLayoutManager(this@DietsFragment.requireContext())
+            layoutManager = manager
             adapter=dietsAdapter
+            addItemDecoration(decorator)
             setHasFixedSize(false)
         }
+    }
+
+    private fun onItemSelected(meal: mealItem){
+        findNavController().navigate(DietsFragmentDirections.actionDietsFragmentToDetailMealFragment(meal))
     }
 }

@@ -7,16 +7,89 @@
     tools:context=".ui.home.HomeFragment">
 
     <TextView
-        android:id="@+id/text_home"
+        android:id="@+id/user_name_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:padding="5dp"
+        android:text="TextView"
         android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/profile_image_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_name_text_view"
+        tools:src="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/info_image_view"
+        android:layout_width="300dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_image_view"
+        tools:src="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/stadistics_image_view"
+        android:layout_width="300dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/info_image_view"
+        tools:src="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/gradient_profile"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:src="@drawable/black_gradient"
+        app:layout_constraintBottom_toBottomOf="@+id/info_image_view"
+        app:layout_constraintEnd_toEndOf="@+id/info_image_view"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/info_image_view" />
+
+    <ImageView
+        android:id="@+id/gradient_stadistics"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:src="@drawable/black_gradient"
+        app:layout_constraintBottom_toBottomOf="@+id/stadistics_image_view"
+        app:layout_constraintEnd_toEndOf="@+id/stadistics_image_view"
+        app:layout_constraintStart_toStartOf="@+id/stadistics_image_view" />
+
+    <TextView
+        android:id="@+id/title_profile_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:layout_marginStart="16dp"
+        android:textStyle="bold"
+        android:textColor="#fff"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="@+id/info_image_view"
+        app:layout_constraintStart_toStartOf="@+id/gradient_profile" />
+
+    <TextView
+        android:id="@+id/title_stadistics_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:layout_marginStart="16dp"
+        android:textStyle="bold"
+        android:textColor="#fff"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="@+id/stadistics_image_view"
+        app:layout_constraintStart_toStartOf="@+id/gradient_stadistics" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.ironathlete.R
 import com.example.ironathlete.databinding.FragmentHomeBinding
 
 
@@ -21,12 +22,17 @@ class HomeFragment : Fragment() {
     ): View {
         homeBinding = FragmentHomeBinding.inflate(inflater, container,false)
         homeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
-
         return homeBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        with(homeBinding){
+            profileImageView.setImageResource(R.drawable.playa)
+            stadisticsImageView.setImageResource(R.drawable.ciudad)
+        }
+
     }
 
 

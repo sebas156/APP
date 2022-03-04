@@ -29,7 +29,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         with(homeBinding){
-            profileImageView.setImageResource(R.drawable.playa)
+           infoImageView.setImageResource(R.drawable.playa)
             stadisticsImageView.setImageResource(R.drawable.ciudad)
         }
 

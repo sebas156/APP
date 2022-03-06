@@ -41,11 +41,18 @@
         <argument
             android:name="mealInformation"
             app:argType="com.example.ironathlete.mealItem" />
+        <action
+            android:id="@+id/action_detailMealFragment_to_dietsFragment"
+            app:destination="@id/dietsFragment" />
     </fragment>
     <fragment
         android:id="@+id/infoUserFragment"
         android:name="com.example.ironathlete.ui.infoUser.InfoUserFragment"
         android:label="fragment_info_user"
-        tools:layout="@layout/fragment_info_user" />
+        tools:layout="@layout/fragment_info_user" >
+        <action
+            android:id="@+id/action_infoUserFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
 
 </navigation>

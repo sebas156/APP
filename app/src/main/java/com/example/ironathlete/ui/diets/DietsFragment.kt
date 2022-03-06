@@ -32,6 +32,8 @@ class DietsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        dietsList=ArrayList()
+
         dietsList.add(
             mealItem(
                 R.drawable.burguer,

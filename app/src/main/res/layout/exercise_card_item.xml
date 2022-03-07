@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <androidx.cardview.widget.CardView
+
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbarTrackVertical="@drawable/ic_baseline_cached_24">
+
+        <ImageView
+            android:id="@+id/card_image"
+            android:layout_width="147dp"
+            android:layout_height="131dp"
+            app:srcCompat="@drawable/pexels_photo_841130"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="16dp" />
+
+        <TextView
+            android:id="@+id/card_rep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:translationX="200dp"
+            android:translationY="70dp"
+            tools:layout_editor_absoluteX="209dp"
+            tools:layout_editor_absoluteY="91dp" />
+
+        <TextView
+            android:id="@+id/card_weight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:translationX="300dp"
+            android:translationY="70dp"
+            tools:layout_editor_absoluteX="318dp"
+            tools:layout_editor_absoluteY="91dp" />
+
+        <TextView
+            android:id="@+id/card_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:ems="10"
+            android:fontFamily="sans-serif"
+            android:text="TextView"
+            android:textStyle="bold"
+            android:translationX="200dp"
+            android:translationY="25dp"
+            tools:layout_editor_absoluteX="185dp"
+            tools:layout_editor_absoluteY="34dp" />
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_baseline_cached_24"
+            android:translationX="175dp"
+            android:translationY="70dp"
+            tools:layout_editor_absoluteX="185dp"
+            tools:layout_editor_absoluteY="91dp" />
+
+        <ImageView
+            android:id="@+id/imageView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_baseline_fitness_center_24"
+            android:translationX="275dp"
+            android:translationY="70dp"
+            tools:layout_editor_absoluteX="294dp"
+            tools:layout_editor_absoluteY="91dp" />
+
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:translationX="340dp"
+            android:translationY="20dp"
+            />
+    </androidx.cardview.widget.CardView>
+
+</layout>
+

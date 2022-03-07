@@ -18,7 +18,23 @@
         android:id="@+id/muscleFragment"
         android:name="com.example.ironathlete.ui.muscle.MuscleFragment"
         android:label="fragment_muscle"
-        tools:layout="@layout/fragment_muscle" />
+        tools:layout="@layout/fragment_muscle">
+        <action
+            android:id="@+id/action_muscleFragment_to_exerciseFragment"
+            app:destination="@id/exerciseFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/exerciseFragment"
+        android:name="com.example.ironathlete.ui.exerciseDetails.ExerciseFragment"
+        android:label="fragment_exercise"
+        tools:layout="@layout/exercise_fragment" >
+        <argument
+            android:name="exerciseInformation"
+            app:argType="com.example.ironathlete.Exercise" />
+        <action
+            android:id="@+id/action_exerciseFragment_to_muscleFragment"
+            app:destination="@id/muscleFragment" />
+    </fragment>
     <fragment
         android:id="@+id/communityFragment"
         android:name="com.example.ironathlete.ui.comunity.CommunityFragment"

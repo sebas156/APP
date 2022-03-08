@@ -24,7 +24,7 @@
             app:destination="@id/exerciseFragment" >
             <argument
                 android:name="exerciseInformation"
-                app:argType="com.example.ironathlete.Exercise" />
+                app:argType="com.example.ironathlete.local.exercise.Exercise" />
         </action>
     </fragment>
     <fragment

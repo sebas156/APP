@@ -10,10 +10,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ironathlete.Community
-import com.example.ironathlete.Exercise
+import com.example.ironathlete.local.exercise.Exercise
 import com.example.ironathlete.R
 import com.example.ironathlete.databinding.FragmentCommunityBinding
-import com.example.ironathlete.local.userAccount
+import com.example.ironathlete.local.user.userAccount
 import com.example.ironathlete.ui.muscle.MuscleAdapter
 import com.example.ironathlete.ui.muscle.MuscleFragmentDirections
 

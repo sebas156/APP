@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ironathlete.Community
-import com.example.ironathlete.Exercise
+import com.example.ironathlete.local.exercise.Exercise
 import com.example.ironathlete.R
 import com.example.ironathlete.databinding.CommunityCardItemBinding
 import com.example.ironathlete.databinding.ExerciseCardItemBinding

@@ -11,7 +11,8 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ironathlete.R
 import com.example.ironathlete.databinding.FragmentDietsBinding
-import com.example.ironathlete.mealItem
+import com.example.ironathlete.local.diet.mealItem
+import java.sql.Types.NULL
 
 class DietsFragment : Fragment() {
 
@@ -36,24 +37,26 @@ class DietsFragment : Fragment() {
 
         dietsList.add(
             mealItem(
+                NULL,
                 R.drawable.burguer,
                 "Hamburguesa Colombiana",
                 1,
-                "Preparation",
-                1f,
-                1f,
-                1f
+                "",
+                26.6,
+                400.0,
+                5.7
             )
         )
         dietsList.add(
             mealItem(
+                NULL,
                 R.drawable.riceandchicken,
                 "Arroz y pollo",
                 2,
-                "Preparation",
-                1f,
-                1f,
-                1f
+                "",
+                26.6,
+                400.0,
+                5.7
             )
         )
 

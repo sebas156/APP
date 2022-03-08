@@ -34,7 +34,7 @@
         tools:layout="@layout/exercise_fragment" >
         <argument
             android:name="exerciseInformation"
-            app:argType="com.example.ironathlete.Exercise" />
+            app:argType="com.example.ironathlete.local.exercise.Exercise" />
         <action
             android:id="@+id/action_exerciseFragment_to_muscleFragment"
             app:destination="@id/muscleFragment" />
@@ -60,7 +60,7 @@
         tools:layout="@layout/fragment_detail_meal" >
         <argument
             android:name="mealInformation"
-            app:argType="com.example.ironathlete.mealItem" />
+            app:argType="com.example.ironathlete.local.diet.mealItem" />
         <action
             android:id="@+id/action_detailMealFragment_to_dietsFragment"
             app:destination="@id/dietsFragment" />

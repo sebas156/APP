@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ironathlete.R
 import com.example.ironathlete.databinding.ExerciseCardItemBinding
-import com.example.ironathlete.Exercise
+import com.example.ironathlete.local.exercise.Exercise
 
 class MuscleAdapter (
     private val exerciseList: ArrayList<Exercise>,

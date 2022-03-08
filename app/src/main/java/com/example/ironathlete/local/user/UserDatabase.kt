@@ -1,4 +1,4 @@
-package com.example.ironathlete.local
+package com.example.ironathlete.local.user
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

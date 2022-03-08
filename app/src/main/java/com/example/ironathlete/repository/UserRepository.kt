@@ -1,8 +1,8 @@
 package com.example.ironathlete.repository
 
 import com.example.ironathlete.IronAtlheteProject
-import com.example.ironathlete.local.UserDao
-import com.example.ironathlete.local.userAccount
+import com.example.ironathlete.local.user.UserDao
+import com.example.ironathlete.local.user.userAccount
 import java.sql.Types.NULL
 
 class UserRepository {
@@ -14,12 +14,12 @@ class UserRepository {
             password = passWordUser
         )
 
-        val userDao: UserDao = IronAtlheteProject.database.UserDao()
+        val userDao: UserDao = IronAtlheteProject.databaseUser.UserDao()
         userDao.saveUser(user)
     }
 
-    suspend fun searchUser(emailUser: String):userAccount{
-        val userDao: UserDao = IronAtlheteProject.database.UserDao()
+    suspend fun searchUser(emailUser: String): userAccount {
+        val userDao: UserDao = IronAtlheteProject.databaseUser.UserDao()
         val userFound= userDao.searchUser(emailUser)
         return userFound
     }

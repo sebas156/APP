@@ -1,6 +1,6 @@
 package com.example.ironathlete.ui.muscle
 
-import com.example.ironathlete.Exercise
+import com.example.ironathlete.local.exercise.Exercise
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ironathlete.R
 import com.example.ironathlete.databinding.FragmentMuscleBinding
-import com.example.ironathlete.mealItem
-import com.example.ironathlete.ui.diets.DietsAdapter
+import java.sql.Types.NULL
+
 //import com.example.ironathlete.ui.muscle.MuscleFragmentDirections
 
 class MuscleFragment : Fragment() {
@@ -39,6 +39,7 @@ class MuscleFragment : Fragment() {
 
         exerciseList.add(
             Exercise(
+                NULL,
                 "Skipping",
                 R.drawable.skipping,
                 15,
@@ -49,6 +50,7 @@ class MuscleFragment : Fragment() {
         )
         exerciseList.add(
             Exercise(
+                NULL,
                 "Abdomen",
                 R.drawable.abdomen,
                 25,
@@ -59,6 +61,7 @@ class MuscleFragment : Fragment() {
         )
         exerciseList.add(
             Exercise(
+                NULL,
                 "Peso Muerto",
                 R.drawable.pexels_photo_841130,
                 10,
@@ -69,6 +72,7 @@ class MuscleFragment : Fragment() {
         )
         exerciseList.add(
             Exercise(
+                NULL,
                 "Rotacion de Tronco",
                 R.drawable.abdomen,
                 25,
@@ -79,6 +83,7 @@ class MuscleFragment : Fragment() {
         )
         exerciseList.add(
             Exercise(
+                NULL,
                 "Espalda",
                 R.drawable.pexels_photo_841130,
                 30,
@@ -89,6 +94,7 @@ class MuscleFragment : Fragment() {
         )
         exerciseList.add(
             Exercise(
+                NULL,
                 "Sentadilla",
                 R.drawable.sentadilla,
                 20,

@@ -1,18 +1,14 @@
 package com.example.ironathlete.ui.login
 
-import android.content.Intent
 import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.ironathlete.databinding.ActivityLoginBinding
-import com.example.ironathlete.local.userAccount
+import com.example.ironathlete.local.user.userAccount
 import com.example.ironathlete.repository.UserRepository
-import com.example.ironathlete.ui.main.MainActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import java.sql.Types.NULL
 import java.util.regex.Pattern
 
 class LoginViewModel : ViewModel() {

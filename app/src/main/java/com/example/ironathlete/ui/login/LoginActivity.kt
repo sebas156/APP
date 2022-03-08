@@ -8,8 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.ironathlete.ui.main.MainActivity
 import com.example.ironathlete.ui.registro.RegistroActivity
 import com.example.ironathlete.databinding.ActivityLoginBinding
-import com.example.ironathlete.local.userAccount
-import java.sql.Types.NULL
+import com.example.ironathlete.local.user.userAccount
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var loginBinding : ActivityLoginBinding

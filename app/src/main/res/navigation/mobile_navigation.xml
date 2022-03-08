@@ -21,7 +21,11 @@
         tools:layout="@layout/fragment_muscle">
         <action
             android:id="@+id/action_muscleFragment_to_exerciseFragment"
-            app:destination="@id/exerciseFragment" />
+            app:destination="@id/exerciseFragment" >
+            <argument
+                android:name="exerciseInformation"
+                app:argType="com.example.ironathlete.Exercise" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/exerciseFragment"

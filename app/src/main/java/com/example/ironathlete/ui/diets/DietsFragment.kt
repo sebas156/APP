@@ -38,14 +38,22 @@ class DietsFragment : Fragment() {
             mealItem(
                 R.drawable.burguer,
                 "Hamburguesa Colombiana",
-                1
+                1,
+                "Preparation",
+                1f,
+                1f,
+                1f
             )
         )
         dietsList.add(
             mealItem(
                 R.drawable.riceandchicken,
                 "Arroz y pollo",
-                2
+                2,
+                "Preparation",
+                1f,
+                1f,
+                1f
             )
         )
 

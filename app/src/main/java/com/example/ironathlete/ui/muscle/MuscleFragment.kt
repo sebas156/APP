@@ -3,6 +3,7 @@ package com.example.ironathlete.ui.muscle
 import com.example.ironathlete.Exercise
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -44,7 +45,7 @@ class MuscleFragment : Fragment() {
                 15,
                 10f,
                 "Cuerpo debería estar en posición diagonal con respecto al suelo. Activa el core y asegúrate de que el cuerpo forma una línea recta de la cabeza a los pies.",
-                R.drawable.skipping
+                R.drawable.exercise
             )
         )
         exerciseList.add(
@@ -54,7 +55,7 @@ class MuscleFragment : Fragment() {
                 25,
                 8f,
                 "Eleva el torso hacia las rodillas sin levantar la espalda completamente del suelo ni levantar los pies. Ejerce fuerza en los abdominales, evitando forzar otros músculos.",
-                R.drawable.skipping
+                R.drawable.exercise
             )
         )
         exerciseList.add(
@@ -64,7 +65,7 @@ class MuscleFragment : Fragment() {
                 10,
                 10f,
                 "Con la espalda completamente recta, flexiona ligeramente las rodillas.Comienza a descender el cuerpo con la espalda recta e intentando que los muslos queden paralelos al cuerpo y los pies y la parte inferior de las piernas en ángulo recto.",
-                R.drawable.skipping
+                R.drawable.exercise
             )
         )
         exerciseList.add(
@@ -74,7 +75,7 @@ class MuscleFragment : Fragment() {
                 25,
                 6f,
                 "Las rotaciones abdominales se realizan girando la parte inferior del tronco, de este modo lo que debemos tener presente es mantener las piernas inmóviles, al igual que la parte superior",
-                R.drawable.skipping
+                R.drawable.exercise
             )
         )
         exerciseList.add(
@@ -84,7 +85,7 @@ class MuscleFragment : Fragment() {
                 30,
                 10f,
                 "Cuerpo debería estar en posición diagonal con respecto al suelo. Activa el core y asegúrate de que el cuerpo forma una línea recta de la cabeza a los pies.",
-                R.drawable.skipping
+                R.drawable.exercise
             )
         )
         exerciseList.add(
@@ -94,7 +95,7 @@ class MuscleFragment : Fragment() {
                 20,
                 12f,
                 "Cuerpo debería estar en posición diagonal con respecto al suelo. Activa el core y asegúrate de que el cuerpo forma una línea recta de la cabeza a los pies.",
-                R.drawable.skipping
+                R.drawable.exercise
             )
         )
 

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:scrollbarTrackVertical="@drawable/ic_baseline_cached_24">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:layout_margin="10dp">
+
+        <ImageView
+            android:id="@+id/card_image"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:translationX="30dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            app:srcCompat="@drawable/pexels_photo_841130"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="16dp"
+            android:layout_margin="5dp"/>
+
+        <TextView
+            android:id="@+id/card_name"
+            android:translationX="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/card_image"
+            android:text="TextView"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"/>
+
+        <TextView
+            android:id="@+id/card_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/card_name"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="5dp"
+            android:ems="10"
+            android:fontFamily="sans-serif"
+            android:text="TextView"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/card_description"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/card_title"
+            android:text="TextView" />
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/card_description"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="5dp"
+            app:srcCompat="@drawable/ic_baseline_thumb_up_24" />
+    <TextView
+        android:id="@+id/card_likes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/card_description"
+        android:layout_margin="5dp"
+        android:layout_toRightOf="@id/imageView7"
+        android:text="TextView" />
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_baseline_fitness_center_24"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="80dp"
+        android:layout_below="@id/card_description"
+        android:layout_toRightOf="@id/imageView7"/>
+    <TextView
+        android:id="@+id/card_weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/card_description"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@id/imageView8"
+        android:text="TextView" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

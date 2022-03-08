@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ironathlete.R
 import com.example.ironathlete.databinding.MealCardItemBinding
-import com.example.ironathlete.mealItem
+import com.example.ironathlete.local.diet.mealItem
 
 class DietsAdapter (
     private val dietList: ArrayList<mealItem>,

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "571124099476",
+    "project_id": "ironathlete",
+    "storage_bucket": "ironathlete.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:571124099476:android:80847b43624173c9f94781",
+        "android_client_info": {
+          "package_name": "com.example.ironathlete"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "571124099476-slo24f2inbglh2q7sb3p7dgfskagvnpl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrNGF7uxpitXICzTJzeOjGdFyPASF5OIA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "571124099476-slo24f2inbglh2q7sb3p7dgfskagvnpl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

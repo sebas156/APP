@@ -9,5 +9,4 @@ data class Community(
     val weight : Float,
     val likes : Int,
     val user : userAccount
-
 ):Serializable

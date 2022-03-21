@@ -1,4 +1,4 @@
-package com.example.ironathlete.repository
+package com.example.ironathlete.local.repository
 
 import com.example.ironathlete.IronAtlheteProject
 import com.example.ironathlete.local.user.UserDao

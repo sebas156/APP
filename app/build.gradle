@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'androidx.navigation.safeargs'
     id 'kotlin-kapt'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -39,6 +40,8 @@ android {
 
 dependencies {
 
+    implementation 'com.google.firebase:firebase-auth-ktx:21.0.2'
+    implementation 'com.google.firebase:firebase-firestore-ktx:24.0.2'
     def room_version = "2.4.1"
 
     implementation "androidx.room:room-runtime:$room_version"

@@ -28,7 +28,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/user_name_text_view"
+            android:id="@+id/user_name_text_input_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -39,6 +39,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/user_name_text_edit"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:hint="@string/hint_user_name" />
@@ -51,9 +52,10 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/user_name_text_view">
+            app:layout_constraintTop_toBottomOf="@+id/user_name_text_input_layout">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/weigth_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:hint="@string/weight" />
@@ -66,9 +68,10 @@
             android:layout_marginTop="16dp"
             app:layout_constraintEnd_toStartOf="@+id/weigth_text_input_layout"
             app:layout_constraintStart_toEndOf="@+id/Age_Text_Input_Layout"
-            app:layout_constraintTop_toBottomOf="@+id/user_name_text_view">
+            app:layout_constraintTop_toBottomOf="@+id/user_name_text_input_layout">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/height_text_edit"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:hint="@string/height" />
@@ -86,6 +89,7 @@
             app:layout_constraintTop_toBottomOf="@+id/weigth_text_input_layout">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/email_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:hint="@string/user_email" />
@@ -206,6 +210,7 @@
                 android:id="@+id/bulk_radio_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:minHeight="48dp"
                 android:text="@string/bulk" />
 
             <RadioButton
@@ -234,9 +239,10 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/user_name_text_view">
+            app:layout_constraintTop_toBottomOf="@+id/user_name_text_input_layout">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/age_text_edit"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:hint="@string/age" />

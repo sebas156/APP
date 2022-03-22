@@ -52,4 +52,8 @@ class ServerUserRepository {
         val user = db.collection("users").document(userID)
         return user.get().await()
     }
+
+    suspend fun getUserId(): String? {
+        return auth.currentUser?.uid
+    }
 }

@@ -6,13 +6,17 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.ironathlete.local.user.userAccount
 import com.example.ironathlete.local.repository.UserRepository
+import com.example.ironathlete.server.ServerRepositories.ServerUserRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.regex.Pattern
 
 class LoginViewModel : ViewModel() {
-    private val repository = UserRepository()
+    //private val repository = UserRepository() Room
+
+    private val serverUserRepository = ServerUserRepository()
+
 
     private val msg : MutableLiveData<String> = MutableLiveData()
     val msgDone: LiveData<String> = msg
@@ -20,12 +24,12 @@ class LoginViewModel : ViewModel() {
     private val validate: MutableLiveData<Boolean> = MutableLiveData()
     val validated: LiveData<Boolean> = validate
 
-    private val findUser : MutableLiveData<userAccount?> = MutableLiveData()
-    val findUserDone : MutableLiveData<userAccount?> = findUser
+    //private val findUser : MutableLiveData<userAccount?> = MutableLiveData() Room
+    //val findUserDone : MutableLiveData<userAccount?> = findUser
 
     fun searchUser(userEmail: String) {
         GlobalScope.launch(Dispatchers.IO){
-            findUser.postValue(repository.searchUser(userEmail))
+            //findUser.postValue(repository.searchUser(userEmail)) Room
         }
     }
 
@@ -40,7 +44,8 @@ class LoginViewModel : ViewModel() {
             msg.value = "Ingrese una contraseña valida, mayor de 6 digitos."
         }
         else{
-            searchUser(email)
+            //searchUser(email) Room
+
         }
     }
 

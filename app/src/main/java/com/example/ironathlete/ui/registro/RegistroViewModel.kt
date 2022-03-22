@@ -51,7 +51,6 @@ class RegistroViewModel : ViewModel() {
             when(val result=serverUserRepository.registerUser(emailUser,passWordUser)){
                 "The email address is already in use by another account." -> msg.postValue("Ya existe una cuente con ese correo")
                 "The given password is invalid. [ Password should be at least 6 characters ]" -> msg.postValue("La contraseña debe tener minimo 6 digitos")
-                "The email address is badly formatted." -> msg.postValue("El formato del email es incorrecto")
                 "A network error (such as timeout, interrupted connection or unreachable host) has occurred." -> msg.postValue("No tiene conexion a internet.")
                 else -> registerSuccess.postValue(result)
             }

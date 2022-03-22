@@ -7,14 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.example.ironathlete.R
 import com.example.ironathlete.databinding.FragmentInfoUserBinding
-import com.example.ironathlete.local.repository.UserRepository
-import com.example.ironathlete.server.ServerRepositories.ServerUserRepository
 import com.example.ironathlete.server.UserObject
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 class InfoUserFragment : Fragment() {
 
@@ -43,6 +37,58 @@ class InfoUserFragment : Fragment() {
             onUserLoadedIdDoneSuscribe(result)
         }
         getUserId()
+
+        infoUserBinding.saveButton.setOnClickListener {
+            actualizarDatos()
+        }
+    }
+
+    private fun actualizarDatos() {
+        val verificado = actualizarDatosMemoriaTemporal()
+        if(verificado) actualizarDatosBaseDatos()
+        else Toast.makeText(requireContext(),"Por favor rellene todos los campos de manera valida",Toast.LENGTH_SHORT).show()
+    }
+
+    private fun actualizarDatosBaseDatos() {
+
+    }
+
+    private fun actualizarDatosMemoriaTemporal() : Boolean {
+        with(infoUserBinding){
+            if(userNameTextEdit.text.toString() == "" ||ageTextEdit.text.toString()=="" || heightTextEdit.text.toString() == "" || weigthEditText.text.toString()== "" || emailEditText.text.toString() == "" ) return false
+            currentUser.fullName = userNameTextEdit.text.toString()
+            currentUser.age=ageTextEdit.text.toString().toInt()
+            currentUser.height=heightTextEdit.text.toString().toDouble()
+            currentUser.weight=weigthEditText.text.toString().toDouble()
+            currentUser.email = emailEditText.text.toString()
+
+            if (!radioButtonMale.isChecked && !radioButtonFemale.isChecked) return false
+            when(radioButtonMale.isChecked){
+                true -> currentUser.gender="Hombre"
+                else -> currentUser.gender="Mujer"
+            }
+
+            if (!radioButtonMale.isChecked && !radioButtonFemale.isChecked) return false
+            when(radioButtonMale.isChecked){
+                true -> currentUser.gender="Hombre"
+                false -> currentUser.gender="Mujer"
+            }
+
+            currentUser.hourWorkOut=timeButton.text.toString()
+
+            if (!radioButtonYes.isChecked && !radioButtonNO.isChecked) return false
+            when(radioButtonYes.isChecked){
+                true -> currentUser.goToGym=true
+                false -> currentUser.goToGym=false
+            }
+
+            if (!bulkRadioButton.isChecked && !shreddedRadioButton.isChecked) return false
+            when(bulkRadioButton.isChecked){
+                true -> currentUser.objetive="bulk"
+                false -> currentUser.objetive="shredded"
+            }
+        }
+        return true
     }
 
     private fun onUserLoadedIdDoneSuscribe(result: String?) {
@@ -57,8 +103,8 @@ class InfoUserFragment : Fragment() {
             if(currentUser.weight != null) weigthEditText.setText(currentUser.weight.toString())
             emailEditText.setText(currentUser.email)
             when(currentUser.gender){
-                "Homre" -> radioButtonMale.isChecked
-                "Mujer" -> radioButtonFemale.isChecked
+                "Homre" -> radioButtonMale.isChecked = true
+                "Mujer" -> radioButtonFemale.isChecked = true
                 else -> {}
             }
             if(currentUser.hourWorkOut != ""){
@@ -66,16 +112,16 @@ class InfoUserFragment : Fragment() {
             }
 
             if(currentUser.goToGym == true){
-                radioButtonYes.isChecked
-            }else{
-                radioButtonNO.isChecked
+                radioButtonYes.isChecked = true
+            }else if(currentUser.goToGym == false){
+                radioButtonNO.isChecked = true
             }
 
             if(currentUser.objetive == "bulk"){
-                bulkRadioButton.isChecked
+                bulkRadioButton.isChecked = true
             }
-            else{
-                shreddedRadioButton.isChecked
+            else if(currentUser.objetive == "shredded"){
+                shreddedRadioButton.isChecked = true
             }
         }
     }

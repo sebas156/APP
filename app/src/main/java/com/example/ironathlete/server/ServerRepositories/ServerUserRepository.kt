@@ -35,6 +35,10 @@ class ServerUserRepository {
         db.collection("users").document(userCreated.uid.toString()).set(userCreated).await()
     }
 
+    suspend fun updateUser(user:UserObject){
+        db.collection("users").document(user.uid.toString()).set(user).await()
+    }
+
     suspend fun singInUser(email: String, password: String) : String?{
         return try {
             auth.signInWithEmailAndPassword(email, password).await() // Si yo coloco el await ya los listener no sirven

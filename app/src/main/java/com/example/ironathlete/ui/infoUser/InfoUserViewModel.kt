@@ -19,6 +19,9 @@ class InfoUserViewModel : ViewModel() {
     private val userLoadedIndicated : MutableLiveData<Boolean> = MutableLiveData()
     val userLoadedDone: LiveData<Boolean> = userLoadedIndicated
 
+    private val userUpdated : MutableLiveData<Boolean> = MutableLiveData()
+    val userUpdatedDone: LiveData<Boolean> = userUpdated
+
     private val loadedUserId: MutableLiveData<String> = MutableLiveData()
     val loadedUserIdDone: LiveData<String> = loadedUserId
 
@@ -37,6 +40,13 @@ class InfoUserViewModel : ViewModel() {
     fun getUserId() {
         GlobalScope.launch(Dispatchers.IO){
             loadedUserId.postValue(serverRepository.getUserId())
+        }
+    }
+
+    fun updateInfoUser(currentUser: UserObject) {
+        GlobalScope.launch(Dispatchers.IO){
+            serverRepository.updateUser(currentUser)
+            userUpdated.postValue(true)
         }
     }
 }

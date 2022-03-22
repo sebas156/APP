@@ -38,24 +38,54 @@ class InfoUserFragment : Fragment() {
         }
         getUserId()
 
+        infoUserViewModel.userUpdatedDone.observe(viewLifecycleOwner){
+            result ->
+            onUserUpdatedDoneSuscribe()
+        }
+
+
+        infoUserBinding.timeButton.setOnClickListener {
+            showTimePickerDialog()
+        }
+
         infoUserBinding.saveButton.setOnClickListener {
             actualizarDatos()
         }
     }
 
+    private fun onUserUpdatedDoneSuscribe() {
+        Toast.makeText(requireContext(),"Informacion actualizada correctamente",Toast.LENGTH_SHORT)
+    }
+
+    private fun showTimePickerDialog() {
+        val timePicker = TimePickerFragment{time -> onTimeSelected(time)}
+        timePicker.show(parentFragmentManager, "time")
+    }
+
+    private fun onTimeSelected(time:String){
+        infoUserBinding.timeButton.text=time
+    }
+
     private fun actualizarDatos() {
         val verificado = actualizarDatosMemoriaTemporal()
-        if(verificado) actualizarDatosBaseDatos()
+        if(verificado) {
+            calcularRequerimientos()
+            actualizarDatosBaseDatos()
+        }
         else Toast.makeText(requireContext(),"Por favor rellene todos los campos de manera valida",Toast.LENGTH_SHORT).show()
     }
 
-    private fun actualizarDatosBaseDatos() {
+    private fun calcularRequerimientos() {
 
+    }
+
+    private fun actualizarDatosBaseDatos() {
+        infoUserViewModel.updateInfoUser(currentUser)
     }
 
     private fun actualizarDatosMemoriaTemporal() : Boolean {
         with(infoUserBinding){
-            if(userNameTextEdit.text.toString() == "" ||ageTextEdit.text.toString()=="" || heightTextEdit.text.toString() == "" || weigthEditText.text.toString()== "" || emailEditText.text.toString() == "" ) return false
+            if(userNameTextEdit.text.toString() == "" || ageTextEdit.text.toString()=="" || heightTextEdit.text.toString() == "" || weigthEditText.text.toString()== "" || emailEditText.text.toString() == "" ) return false
             currentUser.fullName = userNameTextEdit.text.toString()
             currentUser.age=ageTextEdit.text.toString().toInt()
             currentUser.height=heightTextEdit.text.toString().toDouble()
@@ -74,6 +104,7 @@ class InfoUserFragment : Fragment() {
                 false -> currentUser.gender="Mujer"
             }
 
+            if(timeButton.text.toString()=="hh-mm-ss" || timeButton.text.toString()=="HH-MM-SS") return false
             currentUser.hourWorkOut=timeButton.text.toString()
 
             if (!radioButtonYes.isChecked && !radioButtonNO.isChecked) return false

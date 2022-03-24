@@ -13,6 +13,10 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ironathlete.R
 import com.example.ironathlete.databinding.FragmentMuscleBinding
+import com.example.ironathlete.local.exercise.ExerciseFirebase
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
+import com.google.firebase.ktx.Firebase
 import java.sql.Types.NULL
 
 //import com.example.ironathlete.ui.muscle.MuscleFragmentDirections
@@ -22,7 +26,16 @@ class MuscleFragment : Fragment() {
     private lateinit var muscleBinding: FragmentMuscleBinding
     private lateinit var muscleViewModel: MuscleViewModel
     private lateinit var muscleAdapter: MuscleAdapter
+
+    private lateinit var ejemplo: ExerciseFirebase
+
     private var exerciseList: ArrayList<Exercise> = ArrayList()
+    private var exerciseFList: ArrayList<ExerciseFirebase> = ArrayList()
+
+    val db = Firebase.firestore
+    val rutinesRef = db.collection("rutines")
+    val exercisesRef = db.collection("exercises")
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,6 +43,18 @@ class MuscleFragment : Fragment() {
     ): View? {
         muscleBinding = FragmentMuscleBinding.inflate(inflater,container,false)
         muscleViewModel = ViewModelProvider(this)[MuscleViewModel::class.java]
+
+        //rutinesRef.document("GXVeOpe4E6MbTtBIgI2A").get()
+        exercisesRef.get()
+            .addOnSuccessListener { result ->
+                for (rutine in result) {
+
+                    exerciseFList.add(rutine.toObject<ExerciseFirebase>())
+                    ejemplo = rutine.toObject<ExerciseFirebase>()
+                    Log.i("rutine", "${exerciseFList[0].id} = ${exerciseFList[0].name}")
+                }
+            }
+
         return muscleBinding.root
     }
 
@@ -38,7 +63,7 @@ class MuscleFragment : Fragment() {
 
         exerciseList=ArrayList()
 
-        exerciseList.add(
+        /*exerciseList.add(
             Exercise(
                 NULL,
                 "Skipping",
@@ -103,11 +128,24 @@ class MuscleFragment : Fragment() {
                 "Cuerpo debería estar en posición diagonal con respecto al suelo. Activa el core y asegúrate de que el cuerpo forma una línea recta de la cabeza a los pies.",
                 R.drawable.exercise
             )
-        )
+        )*/
+
+
+        //rutinesRef.document("GXVeOpe4E6MbTtBIgI2A").get()
+        /*exercisesRef.get()
+            .addOnSuccessListener { result ->
+                for (rutine in result) {
+
+                    exerciseFList.add(rutine.toObject<ExerciseFirebase>())
+                    ejemplo = rutine.toObject<ExerciseFirebase>()
+                    Log.i("rutine", "${exerciseFList[0].id} = ${exerciseFList[0].name}")
+                }
+            }*/
+
 
         val manager = LinearLayoutManager(this@MuscleFragment.requireContext())
         val decorator = DividerItemDecoration(this@MuscleFragment.requireContext(),manager.orientation)
-        muscleAdapter= MuscleAdapter(exerciseList) { onItemSelected(it) }
+        muscleAdapter= MuscleAdapter(exerciseFList) { onItemSelected(it) }
         muscleBinding.ExercisesAvailable.apply{
             layoutManager = manager
             adapter = muscleAdapter
@@ -116,7 +154,8 @@ class MuscleFragment : Fragment() {
         }
     }
 
-    private fun onItemSelected(exercise: Exercise){
-        findNavController().navigate(MuscleFragmentDirections.actionMuscleFragmentToExerciseFragment(exercise))
+    private fun onItemSelected(exercise: ExerciseFirebase){
+        Log.i("selected",exercise.name)
+        //findNavController().navigate(MuscleFragmentDirections.actionMuscleFragmentToExerciseFragment(exercise))
     }
 }

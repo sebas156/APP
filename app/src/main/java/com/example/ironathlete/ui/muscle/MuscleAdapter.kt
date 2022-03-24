@@ -1,16 +1,19 @@
 package com.example.ironathlete.ui.muscle
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ironathlete.R
 import com.example.ironathlete.databinding.ExerciseCardItemBinding
-import com.example.ironathlete.local.exercise.Exercise
+//import com.example.ironathlete.local.exercise.Exercise
+import com.example.ironathlete.local.exercise.ExerciseFirebase
+//import com.squareup.picasso.Picasso
 
 class MuscleAdapter (
-    private val exerciseList: ArrayList<Exercise>,
-    private val onClickListener:(Exercise) -> Unit
+    private val exerciseList: ArrayList<ExerciseFirebase>,
+    private val onClickListener:(ExerciseFirebase) -> Unit
     ): RecyclerView.Adapter<MuscleAdapter.MuscleViewHolder>(){
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MuscleViewHolder {
@@ -30,9 +33,11 @@ class MuscleAdapter (
         class MuscleViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
             // ViewHolder se encarga de pintar, acá dentro vamos a colocar la informacion de nuetro ItemView
             private val binding = ExerciseCardItemBinding.bind(itemView)
-            fun bind(exercise: Exercise, onClickListener:(Exercise) -> Unit){
+            fun bind(exercise: ExerciseFirebase, onClickListener:(ExerciseFirebase) -> Unit){
                 with(binding){
-                    cardImage.setImageResource(exercise.image)
+                    Log.i("id",exercise.id)
+                    //cardImage.setImageResource(exercise.image)
+                    //Picasso.get().load(exercise.image).into(cardImage)
                     cardTitle.text = exercise.name
                     cardRep.text = exercise.repetitions.toString() + " Rep"
                     cardWeight.text = exercise.weight.toString() + " Lb"

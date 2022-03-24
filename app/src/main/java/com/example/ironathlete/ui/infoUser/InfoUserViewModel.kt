@@ -12,6 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
+
 class InfoUserViewModel : ViewModel() {
     private var serverRepository = ServerUserRepository()
     private lateinit var loadedUser : DocumentSnapshot

@@ -37,7 +37,7 @@ class ExerciseFragment : Fragment() {
 
         with(exerciseBinding){
             exerciseName.text = informationExercise.name
-            exerciseImage.setImageResource(informationExercise.gif)
+            //exerciseImage.setImageResource(informationExercise.gif)
             exerciseDescription.text = informationExercise.description
 
         }

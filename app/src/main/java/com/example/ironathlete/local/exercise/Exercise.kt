@@ -6,6 +6,18 @@ import androidx.room.PrimaryKey
 import java.io.Serializable
 import java.sql.Types
 
+data class ExerciseFirebase(
+    var id : String ="",
+    var name: String="",
+    var image: String="",
+    var repetitions: Int=0,
+    var weight: Float=0f,
+    var description: String="",
+    var gif : String="")
+
+
+
+
 @Entity(tableName = "exercise")
 data class Exercise(
     @PrimaryKey(autoGenerate = true) @ColumnInfo(name="id") var id: Int = Types.NULL,

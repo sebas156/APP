@@ -58,7 +58,8 @@
                 android:id="@+id/weigth_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:hint="@string/weight" />
+                android:hint="@string/weight"
+                android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -74,7 +75,8 @@
                 android:id="@+id/height_text_edit"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:hint="@string/height" />
+                android:hint="@string/height"
+                android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -92,7 +94,8 @@
                 android:id="@+id/email_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:hint="@string/user_email" />
+                android:hint="@string/user_email"
+                android:inputType="textWebEmailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -247,7 +250,8 @@
                 android:id="@+id/age_text_edit"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:hint="@string/age" />
+                android:hint="@string/age"
+                android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView

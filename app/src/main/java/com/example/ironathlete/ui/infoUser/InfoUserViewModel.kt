@@ -7,7 +7,6 @@ import com.example.ironathlete.databinding.FragmentInfoUserBinding
 import com.example.ironathlete.server.ServerRepositories.ServerUserRepository
 import com.example.ironathlete.server.UserObject
 import com.google.firebase.firestore.DocumentSnapshot
-import com.google.firebase.firestore.auth.User
 import com.google.firebase.firestore.ktx.toObject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -15,7 +14,6 @@ import kotlinx.coroutines.launch
 
 class InfoUserViewModel : ViewModel() {
     private var serverRepository = ServerUserRepository()
-    private lateinit var infoUserBinding: FragmentInfoUserBinding
     private lateinit var loadedUser : DocumentSnapshot
 
     private val userLoadedIndicated : MutableLiveData<Boolean> = MutableLiveData()
@@ -70,24 +68,35 @@ class InfoUserViewModel : ViewModel() {
     }
 
     fun calcularObjetivoClorico(caloricRequirement: Double, objetive: String?): Double? {
-        var caloricObjetive = if(objetive =="bulk") caloricRequirement*1.2
-        else caloricRequirement*0.8
 
-        return caloricObjetive
+        return if (objetive == "bulk") caloricRequirement * 1.2
+        else caloricRequirement * 0.8
     }
 
-    fun calcularProteinasRequeridas(objetive: String?, weight: Double?): Double? {
-        if(objetive == "shredded") if (weight != null) {
-            return weight*3
+    fun calcularProteinasRequeridas(weight: Double?,levelExercise: Int?): Double {
+        var proteins = weight!!
+
+        when (levelExercise) {
+            1 -> proteins*=1.2
+            2 -> proteins*=1.5
+            3 -> proteins*=1.7
+            4 -> proteins*=2.5
+            else -> proteins*=3
         }
-        return weight!! *2.5
+        return proteins
     }
 
-    fun calcularGrasasRequeridas(objetive: String?, weight: Double?): Double? {
-        if(objetive == "shredded") if (weight != null) {
-            return weight
+    fun calcularGrasasRequeridas(weight: Double?,levelExercise: Int?): Double? {
+        var fats = weight!!
+
+        when (levelExercise) {
+            1 -> fats*=0.5
+            2 -> fats*=0.6
+            3 -> fats*=0.7
+            4 -> fats*=0.8
+            else -> fats*=1
         }
-        return weight!! *0.8
+        return fats
     }
 
     fun calcularCarbsRequeridos(requiredProtein: Double?, requiredFats: Double?, caloricObjective: Double?): Double? {

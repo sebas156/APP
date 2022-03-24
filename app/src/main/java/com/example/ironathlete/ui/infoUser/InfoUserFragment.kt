@@ -71,8 +71,8 @@ class InfoUserFragment : Fragment() {
         if(verificado) {
             currentUser.caloricRequirement=infoUserViewModel.calcularRequerimientoCalorico(currentUser.weight, currentUser.gender,currentUser.height,currentUser.age,currentUser.levelExercise)
             currentUser.caloricObjective = infoUserViewModel.calcularObjetivoClorico(currentUser.caloricRequirement!!,currentUser.objetive)
-            currentUser.requiredProtein = infoUserViewModel.calcularProteinasRequeridas(currentUser.objetive,currentUser.weight)
-            currentUser.requiredFats = infoUserViewModel.calcularGrasasRequeridas(currentUser.objetive,currentUser.weight)
+            currentUser.requiredProtein = infoUserViewModel.calcularProteinasRequeridas(currentUser.weight,currentUser.levelExercise)
+            currentUser.requiredFats = infoUserViewModel.calcularGrasasRequeridas(currentUser.weight,currentUser.levelExercise)
             currentUser.requiredCarbs = infoUserViewModel.calcularCarbsRequeridos(currentUser.requiredProtein,currentUser.requiredFats,currentUser.caloricObjective)
             actualizarDatosBaseDatos()
         }
@@ -91,12 +91,6 @@ class InfoUserFragment : Fragment() {
             currentUser.height=heightTextEdit.text.toString().toDouble()
             currentUser.weight=weigthEditText.text.toString().toDouble()
             currentUser.email = emailEditText.text.toString()
-
-            if (!radioButtonMale.isChecked && !radioButtonFemale.isChecked) return false
-            when(radioButtonMale.isChecked){
-                true -> currentUser.gender="Hombre"
-                else -> currentUser.gender="Mujer"
-            }
 
             if (!radioButtonMale.isChecked && !radioButtonFemale.isChecked) return false
             when(radioButtonMale.isChecked){

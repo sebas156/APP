@@ -16,5 +16,6 @@ data class UserObject (
      var objetive: String? = "",
      var requiredProtein: Double? = null,
      var requiredCarbs: Double? = null,
-     var requiredFats: Double? = null
+     var requiredFats: Double? = null,
+     var levelExercise: Int? = null
 ):Serializable

@@ -69,14 +69,10 @@ class InfoUserFragment : Fragment() {
     private fun actualizarDatos() {
         val verificado = actualizarDatosMemoriaTemporal()
         if(verificado) {
-            calcularRequerimientos()
+            infoUserViewModel.calcularRequerimientoCalorico(currentUser.weight, currentUser.gender,currentUser.height,currentUser.age)
             actualizarDatosBaseDatos()
         }
         else Toast.makeText(requireContext(),"Por favor rellene todos los campos de manera valida",Toast.LENGTH_SHORT).show()
-    }
-
-    private fun calcularRequerimientos() {
-
     }
 
     private fun actualizarDatosBaseDatos() {
@@ -118,6 +114,15 @@ class InfoUserFragment : Fragment() {
                 true -> currentUser.objetive="bulk"
                 false -> currentUser.objetive="shredded"
             }
+
+            if (!radioButtonPoco.isChecked && !radioButtonLigero.isChecked && !radioButtonFuerte.isChecked && !radioButtonMuy.isChecked && !radioButtonModerado.isChecked) return false
+            when {
+                radioButtonPoco.isChecked -> currentUser.levelExercise = 1
+                radioButtonLigero.isChecked -> currentUser.levelExercise = 2
+                radioButtonModerado.isChecked -> currentUser.levelExercise = 3
+                radioButtonFuerte.isChecked -> currentUser.levelExercise = 4
+                else -> currentUser.levelExercise = 5
+            }
         }
         return true
     }
@@ -153,6 +158,15 @@ class InfoUserFragment : Fragment() {
             }
             else if(currentUser.objetive == "shredded"){
                 shreddedRadioButton.isChecked = true
+            }
+
+            when (currentUser.levelExercise) {
+                1 -> radioButtonPoco.isChecked=true
+                2 -> radioButtonLigero.isChecked=true
+                3 -> radioButtonModerado.isChecked=true
+                4 -> radioButtonFuerte.isChecked=true
+                5 -> radioButtonMuy.isChecked = true
+                else -> {}
             }
         }
     }

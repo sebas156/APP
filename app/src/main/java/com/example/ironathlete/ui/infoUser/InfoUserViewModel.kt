@@ -49,4 +49,15 @@ class InfoUserViewModel : ViewModel() {
             userUpdated.postValue(true)
         }
     }
+
+    fun calcularRequerimientoCalorico(weight: Double?, gender: String?, height: Double?, age: Int?) {
+        var requerimeinto = (10* weight!!)+(6.25* height!!) - (5* age!!)
+
+        if(gender == "hombre") requerimeinto+=5
+        else requerimeinto -=161
+
+
+
+    }
+
 }

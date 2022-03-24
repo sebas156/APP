@@ -54,7 +54,7 @@ class InfoUserFragment : Fragment() {
     }
 
     private fun onUserUpdatedDoneSuscribe() {
-        Toast.makeText(requireContext(),"Informacion actualizada correctamente",Toast.LENGTH_SHORT)
+        Toast.makeText(requireContext(),"Informacion actualizada correctamente",Toast.LENGTH_SHORT).show()
     }
 
     private fun showTimePickerDialog() {
@@ -69,7 +69,11 @@ class InfoUserFragment : Fragment() {
     private fun actualizarDatos() {
         val verificado = actualizarDatosMemoriaTemporal()
         if(verificado) {
-            infoUserViewModel.calcularRequerimientoCalorico(currentUser.weight, currentUser.gender,currentUser.height,currentUser.age)
+            currentUser.caloricRequirement=infoUserViewModel.calcularRequerimientoCalorico(currentUser.weight, currentUser.gender,currentUser.height,currentUser.age,currentUser.levelExercise)
+            currentUser.caloricObjective = infoUserViewModel.calcularObjetivoClorico(currentUser.caloricRequirement!!,currentUser.objetive)
+            currentUser.requiredProtein = infoUserViewModel.calcularProteinasRequeridas(currentUser.objetive,currentUser.weight)
+            currentUser.requiredFats = infoUserViewModel.calcularGrasasRequeridas(currentUser.objetive,currentUser.weight)
+            currentUser.requiredCarbs = infoUserViewModel.calcularCarbsRequeridos(currentUser.requiredProtein,currentUser.requiredFats,currentUser.caloricObjective)
             actualizarDatosBaseDatos()
         }
         else Toast.makeText(requireContext(),"Por favor rellene todos los campos de manera valida",Toast.LENGTH_SHORT).show()
@@ -139,7 +143,7 @@ class InfoUserFragment : Fragment() {
             if(currentUser.weight != null) weigthEditText.setText(currentUser.weight.toString())
             emailEditText.setText(currentUser.email)
             when(currentUser.gender){
-                "Homre" -> radioButtonMale.isChecked = true
+                "Hombre" -> radioButtonMale.isChecked = true
                 "Mujer" -> radioButtonFemale.isChecked = true
                 else -> {}
             }

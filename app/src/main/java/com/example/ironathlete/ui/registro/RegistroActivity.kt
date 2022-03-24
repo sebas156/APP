@@ -29,6 +29,10 @@ class RegistroActivity : AppCompatActivity() {
             onDataValidateSubscribe(result)
         })
 
+        registroViewModel.registerSuccessDone.observe(this){ result ->
+            onRegisterSuccessDoneSuscribe(result)
+        }
+
         with(registroBinding) {
             RegistroButton.setOnClickListener {
                 registroViewModel.validateFields(
@@ -41,17 +45,20 @@ class RegistroActivity : AppCompatActivity() {
 
     }
 
+    private fun onRegisterSuccessDoneSuscribe(uid: String?) {
+        registroViewModel.createUser(uid,registroBinding.UserEmailTextEdit2.text.toString())
+        val intent = Intent(this@RegistroActivity, LoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+
+    }
+
     private fun onDataValidateSubscribe(result: Boolean?) {
 
         with(registroBinding){
             Log.d("TAG", UserEmailTextEdit2.text.toString() + " " + passwordTextEdit.text.toString())
             registroViewModel.saveUser(UserEmailTextEdit2.text.toString(), passwordTextEdit.text.toString())
         }
-
-        val intent = Intent(this@RegistroActivity, LoginActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        startActivity(intent)
-
     }
 
     private fun onMsgDoneSuscribe(message: String?) {

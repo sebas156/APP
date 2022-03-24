@@ -9,6 +9,7 @@ import com.example.ironathlete.ui.main.MainActivity
 import com.example.ironathlete.ui.registro.RegistroActivity
 import com.example.ironathlete.databinding.ActivityLoginBinding
 import com.example.ironathlete.local.user.userAccount
+import com.google.firebase.firestore.DocumentSnapshot
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var loginBinding : ActivityLoginBinding
@@ -24,13 +25,28 @@ class LoginActivity : AppCompatActivity() {
             onMsgDoneSuscribe(message)
         })
 
+        loginViewModel.SignInSuccessDone.observe(this){ userID ->
+            onSignInSuccessDoneSuscribe(userID)
+        }
+
+        loginViewModel.userLoadedDone.observe(this){
+            loaded ->
+            onUserLoadedDoneSuscribe(loaded)
+        }
+
+        loginViewModel.msgGreetingDone.observe(this){
+            message ->
+            onmsgGreetingDoneSuscribe(message)
+        }
+
+        /*
         loginViewModel.validated.observe(this,{validated ->
             onValidatedSuscribe(validated)
         })
 
-        loginViewModel.findUserDone.observe(this,{result ->
+        loginViewModel.findUserDone.observe(this,{result -> //Room
             onFindUserDoneSubscribe(result)
-        })
+        })*/
 
 
         with(loginBinding){
@@ -44,6 +60,28 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun onmsgGreetingDoneSuscribe(message: String?) {
+        Toast.makeText(this,message,Toast.LENGTH_LONG).show()
+    }
+
+    private fun onUserLoadedDoneSuscribe(loaded: Boolean) {
+        loginViewModel.greeting()
+        val intent = Intent(this@LoginActivity, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+    }
+
+    private fun onSignInSuccessDoneSuscribe(userID: String?) {
+        userID?.let { loginViewModel.getUser(it) }
+    }
+
+    private fun onMsgDoneSuscribe(message: String?) {
+        Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
+    }
+
+
+    /*
 
     private fun onValidatedSuscribe(validated: Boolean?) {
         val intent = Intent(this@LoginActivity, MainActivity::class.java)
@@ -59,9 +97,7 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this@LoginActivity,"El usuario ingresado no se encuentra dentro de nuestra base de datos.",Toast.LENGTH_SHORT).show()
             }
         }
-    }
+    }*/
 
-    private fun onMsgDoneSuscribe(message: String?) {
-        Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
-    }
+
 }

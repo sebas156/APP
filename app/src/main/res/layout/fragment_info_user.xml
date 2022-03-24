@@ -28,7 +28,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/user_name_text_view"
+            android:id="@+id/user_name_text_input_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -39,6 +39,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/user_name_text_edit"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:hint="@string/hint_user_name" />
@@ -46,15 +47,15 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/weigth_text_input_layout"
-            android:layout_width="150dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/user_name_text_view">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/user_name_text_input_layout">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/weigth_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:hint="@string/weight" />
@@ -62,15 +63,15 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/height_text_input_layout"
-            android:layout_width="150dp"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/user_name_text_view">
+            app:layout_constraintEnd_toStartOf="@+id/weigth_text_input_layout"
+            app:layout_constraintStart_toEndOf="@+id/Age_Text_Input_Layout"
+            app:layout_constraintTop_toBottomOf="@+id/user_name_text_input_layout">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/height_text_edit"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:hint="@string/height" />
@@ -88,6 +89,7 @@
             app:layout_constraintTop_toBottomOf="@+id/weigth_text_input_layout">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/email_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:hint="@string/user_email" />
@@ -208,25 +210,102 @@
                 android:id="@+id/bulk_radio_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:minHeight="48dp"
                 android:text="@string/bulk" />
 
             <RadioButton
                 android:id="@+id/shredded_radio_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:minHeight="48dp"
                 android:text="@string/shredded" />
         </RadioGroup>
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/save_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginTop="16dp"
             android:text="@string/save"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/PhisicalActivity" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/Age_Text_Input_Layout"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/user_name_text_input_layout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/age_text_edit"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:hint="@string/age" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/phisicalActivityTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/physicalActiviry"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/objetive_radio_group" />
+
+        <RadioGroup
+            android:id="@+id/PhisicalActivity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/phisicalActivityTextView">
+            tools:layout_editor_absoluteY="657dp">
+
+            <RadioButton
+                android:id="@+id/radioButtonPoco"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:text="@string/easyExercise" />
+
+            <RadioButton
+                android:id="@+id/radioButtonLigero"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:text="@string/boyExercise" />
+
+            <RadioButton
+                android:id="@+id/radioButtonModerado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:text="@string/adolecentExercise" />
+
+            <RadioButton
+                android:id="@+id/radioButtonFuerte"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:text="@string/adultExercise" />
+
+            <RadioButton
+                android:id="@+id/radioButtonMuy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:text="@string/legendExercise" />
+        </RadioGroup>
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

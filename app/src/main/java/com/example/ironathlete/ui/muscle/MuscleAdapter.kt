@@ -12,7 +12,7 @@ import com.example.ironathlete.local.exercise.ExerciseFirebase
 //import com.squareup.picasso.Picasso
 
 class MuscleAdapter (
-    private val exerciseList: ArrayList<ExerciseFirebase>,
+    private var exerciseList: ArrayList<ExerciseFirebase>,
     private val onClickListener:(ExerciseFirebase) -> Unit
     ): RecyclerView.Adapter<MuscleAdapter.MuscleViewHolder>(){
 
@@ -29,6 +29,10 @@ class MuscleAdapter (
         }
 
         override fun getItemCount(): Int = exerciseList.size
+
+        fun setExercises(exercises: ArrayList<ExerciseFirebase>) {
+            this.exerciseList = exercises
+        }
 
         class MuscleViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
             // ViewHolder se encarga de pintar, acá dentro vamos a colocar la informacion de nuetro ItemView
@@ -52,4 +56,5 @@ class MuscleAdapter (
                 }
             }
         }
+
 }

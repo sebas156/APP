@@ -1,5 +1,6 @@
 package com.example.ironathlete.ui.muscle
 
+import android.content.ContentValues.TAG
 import com.example.ironathlete.local.exercise.Exercise
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -26,8 +27,8 @@ class MuscleFragment : Fragment() {
     private lateinit var muscleBinding: FragmentMuscleBinding
     private lateinit var muscleViewModel: MuscleViewModel
     private lateinit var muscleAdapter: MuscleAdapter
-
-    private lateinit var ejemplo: ExerciseFirebase
+    private lateinit var manager: LinearLayoutManager
+    private lateinit var decorator: DividerItemDecoration
 
     private var exerciseList: ArrayList<Exercise> = ArrayList()
     private var exerciseFList: ArrayList<ExerciseFirebase> = ArrayList()
@@ -45,7 +46,7 @@ class MuscleFragment : Fragment() {
         muscleViewModel = ViewModelProvider(this)[MuscleViewModel::class.java]
 
         //rutinesRef.document("GXVeOpe4E6MbTtBIgI2A").get()
-        exercisesRef.get()
+        /*exercisesRef.get()
             .addOnSuccessListener { result ->
                 for (rutine in result) {
 
@@ -53,7 +54,33 @@ class MuscleFragment : Fragment() {
                     ejemplo = rutine.toObject<ExerciseFirebase>()
                     Log.i("rutine", "${exerciseFList[0].id} = ${exerciseFList[0].name}")
                 }
+            }*/
+
+        /*var rutineChildEventListener = object: ChildEventListener {
+
+        }*/
+        //rutinesRef
+
+        exercisesRef.addSnapshotListener { value, error -> run {
+
+            if (error != null) {
+                Log.w(TAG, "Listen failed.", error)
+                return@addSnapshotListener
             }
+
+            for (exercise in value!!) {
+                exerciseFList.add(exercise.toObject<ExerciseFirebase>())
+                Log.i("rutine", "${exerciseFList[0].id} = ${exerciseFList[0].name}")
+
+                muscleAdapter.setExercises(exerciseFList)
+                muscleBinding.ExercisesAvailable.apply{
+                    layoutManager = manager
+                    adapter = muscleAdapter
+                    addItemDecoration(decorator)
+                    setHasFixedSize(false)
+                }
+            }
+        }}
 
         return muscleBinding.root
     }
@@ -143,8 +170,8 @@ class MuscleFragment : Fragment() {
             }*/
 
 
-        val manager = LinearLayoutManager(this@MuscleFragment.requireContext())
-        val decorator = DividerItemDecoration(this@MuscleFragment.requireContext(),manager.orientation)
+        manager = LinearLayoutManager(this@MuscleFragment.requireContext())
+        decorator = DividerItemDecoration(this@MuscleFragment.requireContext(),manager.orientation)
         muscleAdapter= MuscleAdapter(exerciseFList) { onItemSelected(it) }
         muscleBinding.ExercisesAvailable.apply{
             layoutManager = manager

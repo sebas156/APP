@@ -24,7 +24,7 @@
             app:destination="@id/exerciseFragment" >
             <argument
                 android:name="exerciseInformation"
-                app:argType="com.example.ironathlete.local.exercise.Exercise" />
+                app:argType="com.example.ironathlete.local.exercise.ExerciseFirebase" />
         </action>
     </fragment>
     <fragment
@@ -34,7 +34,7 @@
         tools:layout="@layout/exercise_fragment" >
         <argument
             android:name="exerciseInformation"
-            app:argType="com.example.ironathlete.local.exercise.Exercise" />
+            app:argType="com.example.ironathlete.local.exercise.ExerciseFirebase" />
         <action
             android:id="@+id/action_exerciseFragment_to_muscleFragment"
             app:destination="@id/muscleFragment" />

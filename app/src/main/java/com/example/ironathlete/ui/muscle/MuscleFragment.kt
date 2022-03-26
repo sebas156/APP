@@ -34,8 +34,8 @@ class MuscleFragment : Fragment() {
     private var exerciseFList: ArrayList<ExerciseFirebase> = ArrayList()
 
     val db = Firebase.firestore
-    val rutinesRef = db.collection("rutines")
-    val exercisesRef = db.collection("exercises")
+    var rutinesRef = db.collection("rutines")
+    var exercisesRef = db.collection("exercises")
 
 
     override fun onCreateView(
@@ -60,6 +60,8 @@ class MuscleFragment : Fragment() {
 
         }*/
         //rutinesRef
+
+        exerciseList=ArrayList()
 
         exercisesRef.addSnapshotListener { value, error -> run {
 
@@ -87,8 +89,6 @@ class MuscleFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        exerciseList=ArrayList()
 
         /*exerciseList.add(
             Exercise(
@@ -181,8 +181,41 @@ class MuscleFragment : Fragment() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        exerciseList=ArrayList()
+
+        /*exercisesRef.addSnapshotListener { value, error -> run {
+
+            if (error != null) {
+                Log.w(TAG, "Listen failed.", error)
+                return@addSnapshotListener
+            }
+
+            for (exercise in value!!) {
+                exerciseFList.add(exercise.toObject<ExerciseFirebase>())
+                Log.i("rutine", "${exerciseFList[0].id} = ${exerciseFList[0].name}")
+
+                muscleAdapter.setExercises(exerciseFList)
+                muscleBinding.ExercisesAvailable.apply{
+                    layoutManager = manager
+                    adapter = muscleAdapter
+                    addItemDecoration(decorator)
+                    setHasFixedSize(false)
+                }
+            }
+        }}*/
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        exercisesRef = db.collection("rutines")
+    }
+
     private fun onItemSelected(exercise: ExerciseFirebase){
         Log.i("selected",exercise.name)
-        //findNavController().navigate(MuscleFragmentDirections.actionMuscleFragmentToExerciseFragment(exercise))
+        findNavController().navigate(MuscleFragmentDirections.actionMuscleFragmentToExerciseFragment(exercise))
     }
 }

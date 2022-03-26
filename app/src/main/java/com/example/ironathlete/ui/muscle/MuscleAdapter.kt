@@ -9,6 +9,8 @@ import com.example.ironathlete.R
 import com.example.ironathlete.databinding.ExerciseCardItemBinding
 //import com.example.ironathlete.local.exercise.Exercise
 import com.example.ironathlete.local.exercise.ExerciseFirebase
+import com.squareup.picasso.Picasso
+
 //import com.squareup.picasso.Picasso
 
 class MuscleAdapter (
@@ -41,7 +43,7 @@ class MuscleAdapter (
                 with(binding){
                     Log.i("id",exercise.id)
                     //cardImage.setImageResource(exercise.image)
-                    //Picasso.get().load(exercise.image).into(cardImage)
+                    Picasso.get().load(exercise.image).into(cardImage)
                     cardTitle.text = exercise.name
                     cardRep.text = exercise.repetitions.toString() + " Rep"
                     cardWeight.text = exercise.weight.toString() + " Lb"

@@ -13,7 +13,7 @@ data class ExerciseFirebase(
     var repetitions: Int=0,
     var weight: Float=0f,
     var description: String="",
-    var gif : String="")
+    var gif : String=""):Serializable
 
 
 

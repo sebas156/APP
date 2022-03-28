@@ -1,5 +1,6 @@
 package com.example.ironathlete.ui.infoUser
 
+import android.app.Activity
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment

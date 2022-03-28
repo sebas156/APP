@@ -3,7 +3,6 @@ package com.example.ironathlete.server
 import java.io.Serializable
 
 data class UserObject (
-
      var uid: String? ="",
      var email: String?="",
      var fullName: String? = "",

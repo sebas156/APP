@@ -1,26 +1,31 @@
 package com.example.ironathlete.ui.infoUser
 
-import android.app.Activity
-import androidx.lifecycle.ViewModelProvider
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.ironathlete.databinding.FragmentInfoUserBinding
 import com.example.ironathlete.server.UserObject
+import com.example.ironathlete.ui.main.MainActivity
+
 
 class InfoUserFragment : Fragment() {
 
     private lateinit var infoUserViewModel: InfoUserViewModel
     private lateinit var infoUserBinding: FragmentInfoUserBinding
+    private lateinit var activity: MainActivity
     lateinit var currentUser : UserObject
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        activity = getActivity() as MainActivity
+        currentUser = activity.getUserObject()
         infoUserBinding= FragmentInfoUserBinding.inflate(inflater,container,false)
         infoUserViewModel = ViewModelProvider(this)[InfoUserViewModel::class.java]
         return infoUserBinding.root
@@ -28,19 +33,8 @@ class InfoUserFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        infoUserViewModel.userLoadedDone.observe(viewLifecycleOwner){
-            result ->
-            onUserLoadedDoneSuscribe(result)
-        }
-
-        infoUserViewModel.loadedUserIdDone.observe(viewLifecycleOwner){
-            result ->
-            onUserLoadedIdDoneSuscribe(result)
-        }
-        getUserId()
 
         infoUserViewModel.userUpdatedDone.observe(viewLifecycleOwner){
-            result ->
             onUserUpdatedDoneSuscribe()
         }
 
@@ -52,10 +46,13 @@ class InfoUserFragment : Fragment() {
         infoUserBinding.saveButton.setOnClickListener {
             actualizarDatos()
         }
+
+        pintarDatos()
     }
 
     private fun onUserUpdatedDoneSuscribe() {
         Toast.makeText(requireContext(),"Informacion actualizada correctamente",Toast.LENGTH_SHORT).show()
+        activity.setUserObject(currentUser)
     }
 
     private fun showTimePickerDialog() {
@@ -126,9 +123,6 @@ class InfoUserFragment : Fragment() {
         return true
     }
 
-    private fun onUserLoadedIdDoneSuscribe(result: String?) {
-        result?.let { infoUserViewModel.getUser(it) }
-    }
 
     private fun pintarDatos() {
         with(infoUserBinding){
@@ -169,15 +163,4 @@ class InfoUserFragment : Fragment() {
             }
         }
     }
-
-    private fun onUserLoadedDoneSuscribe(result: Boolean?) {
-        currentUser= infoUserViewModel.setUserLoaded()!!
-        pintarDatos()
-    }
-
-    private fun getUserId(){
-        infoUserViewModel.getUserId()
-    }
-
-
 }

@@ -16,32 +16,8 @@ class InfoUserViewModel : ViewModel() {
     private var serverRepository = ServerUserRepository()
     private lateinit var loadedUser : DocumentSnapshot
 
-    private val userLoadedIndicated : MutableLiveData<Boolean> = MutableLiveData()
-    val userLoadedDone: LiveData<Boolean> = userLoadedIndicated
-
     private val userUpdated : MutableLiveData<Boolean> = MutableLiveData()
     val userUpdatedDone: LiveData<Boolean> = userUpdated
-
-    private val loadedUserId: MutableLiveData<String> = MutableLiveData()
-    val loadedUserIdDone: LiveData<String> = loadedUserId
-
-    fun getUser(userid: String){
-        GlobalScope.launch(Dispatchers.IO){
-            loadedUser = serverRepository.getUser(userid)
-            userLoadedIndicated.postValue(true)
-        }
-    }
-
-    fun setUserLoaded():UserObject? {
-        val settedUser:UserObject? = loadedUser.toObject<UserObject>()
-        return settedUser
-    }
-
-    fun getUserId() {
-        GlobalScope.launch(Dispatchers.IO){
-            loadedUserId.postValue(serverRepository.getUserId())
-        }
-    }
 
     fun updateInfoUser(currentUser: UserObject) {
         GlobalScope.launch(Dispatchers.IO){

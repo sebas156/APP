@@ -1,7 +1,7 @@
 package com.example.ironathlete.ui.muscle
 
 import android.content.ContentValues.TAG
-import com.example.ironathlete.local.exercise.Exercise
+//import com.example.ironathlete.local.exercise.Exercise
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
@@ -30,11 +30,14 @@ class MuscleFragment : Fragment() {
     private lateinit var manager: LinearLayoutManager
     private lateinit var decorator: DividerItemDecoration
 
-    private var exerciseList: ArrayList<Exercise> = ArrayList()
+    //private var exerciseList: ArrayList<Exercise> = ArrayList()
     private var exerciseFList: ArrayList<ExerciseFirebase> = ArrayList()
+    private var exerciseDayIds: ArrayList<String> = ArrayList()
+    private var exerciseIds: ArrayList<String> = ArrayList()
 
     val db = Firebase.firestore
     var rutinesRef = db.collection("rutines")
+    var exerciseDayRef = db.collection("exercises_day")
     var exercisesRef = db.collection("exercises")
 
 
@@ -59,11 +62,66 @@ class MuscleFragment : Fragment() {
         /*var rutineChildEventListener = object: ChildEventListener {
 
         }*/
-        //rutinesRef
+        rutinesRef
+            .whereEqualTo("name", "RutinaGym")
+            .get()
+            .addOnSuccessListener { documents -> run {
+                for (rutine in documents) {
+                    Log.i("rutine", (rutine.data.get("exercisesDayList") as Map<String, Boolean>).keys.toString())
+                    exerciseDayIds = ArrayList((rutine.data.get("exercisesDayList") as Map<String, Boolean>).keys)
+                }
 
-        exerciseList=ArrayList()
+                exerciseDayRef
+                    //.whereIn("exercisesList", mapOf(exerciseDayIds to ))
+                    .get()
+                    .addOnSuccessListener { documents -> run {
+                        for(exerciseDay in documents) {
+                            if (exerciseDayIds.contains(exerciseDay.id)) {
+                                Log.i(
+                                    "exerciseDay",
+                                    (exerciseDay.data.get("exercisesList") as Map<String, Boolean>).keys.toString()
+                                )
+                                for(exerciseId in ArrayList((exerciseDay.data.get("exercisesList") as Map<String, Boolean>).keys)) {
+                                    exerciseIds.add(exerciseId)
+                                }
+                                //exerciseIds =
+                                    //(exerciseDay.data.get("exercisesList") as Map<String, Boolean>).keys as ArrayList<String>
+                            }
+                        }
 
-        exercisesRef.addSnapshotListener { value, error -> run {
+                        exercisesRef
+                            //.whereIn("id", exerciseIds)
+                            .addSnapshotListener { value, error -> run {
+
+                                if (error != null) {
+                                    Log.w(TAG, "Listen failed.", error)
+                                    return@addSnapshotListener
+                                }
+
+                                for (exercise in value!!) {
+                                    if (exerciseIds.contains(exercise.id)) {
+                                        exerciseFList.add(exercise.toObject<ExerciseFirebase>())
+                                        Log.i("exercise", "${exerciseFList[0].id} = ${exerciseFList[0].name}")
+
+                                        muscleAdapter.setExercises(exerciseFList)
+                                        muscleBinding.ExercisesAvailable.apply{
+                                            layoutManager = manager
+                                            adapter = muscleAdapter
+                                            addItemDecoration(decorator)
+                                            setHasFixedSize(false)
+                                        }
+                                    }
+
+                                }
+                            }}
+                    } }
+            } }
+
+        //exerciseList=ArrayList()
+
+        /*exercisesRef
+            .whereIn("id", exerciseIds)
+            .addSnapshotListener { value, error -> run {
 
             if (error != null) {
                 Log.w(TAG, "Listen failed.", error)
@@ -72,7 +130,7 @@ class MuscleFragment : Fragment() {
 
             for (exercise in value!!) {
                 exerciseFList.add(exercise.toObject<ExerciseFirebase>())
-                Log.i("rutine", "${exerciseFList[0].id} = ${exerciseFList[0].name}")
+                Log.i("exercise", "${exerciseFList[0].id} = ${exerciseFList[0].name}")
 
                 muscleAdapter.setExercises(exerciseFList)
                 muscleBinding.ExercisesAvailable.apply{
@@ -82,7 +140,7 @@ class MuscleFragment : Fragment() {
                     setHasFixedSize(false)
                 }
             }
-        }}
+        }}*/
 
         return muscleBinding.root
     }
@@ -184,7 +242,7 @@ class MuscleFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        exerciseList=ArrayList()
+        //exerciseList=ArrayList()
 
         /*exercisesRef.addSnapshotListener { value, error -> run {
 

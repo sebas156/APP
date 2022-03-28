@@ -43,10 +43,10 @@ class MuscleAdapter (
                 with(binding){
                     Log.i("id",exercise.id)
                     //cardImage.setImageResource(exercise.image)
-                    Picasso.get().load(exercise.image).into(cardImage)
+                    //Picasso.get().load(exercise.image).into(cardImage)
                     cardTitle.text = exercise.name
-                    cardRep.text = exercise.repetitions.toString() + " Rep"
-                    cardWeight.text = exercise.weight.toString() + " Lb"
+                    //cardRep.text = exercise.repetitions.toString() + " Rep"
+                    //cardWeight.text = exercise.weight.toString() + " Lb"
 
 
 

@@ -273,7 +273,7 @@ class MuscleFragment : Fragment() {
     }
 
     private fun onItemSelected(exercise: ExerciseFirebase){
-        Log.i("selected",exercise.name)
+        Log.i("selected",exercise.name.toString())
         findNavController().navigate(MuscleFragmentDirections.actionMuscleFragmentToExerciseFragment(exercise))
     }
 }

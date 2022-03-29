@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.ironathlete.R
 import com.example.ironathlete.databinding.ExerciseCardItemBinding
 //import com.example.ironathlete.local.exercise.Exercise
 import com.example.ironathlete.local.exercise.ExerciseFirebase
-import com.squareup.picasso.Picasso
 
 //import com.squareup.picasso.Picasso
 
@@ -41,12 +41,13 @@ class MuscleAdapter (
             private val binding = ExerciseCardItemBinding.bind(itemView)
             fun bind(exercise: ExerciseFirebase, onClickListener:(ExerciseFirebase) -> Unit){
                 with(binding){
-                    Log.i("id",exercise.id)
+                    Log.i("id",exercise.id.toString())
                     //cardImage.setImageResource(exercise.image)
                     //Picasso.get().load(exercise.image).into(cardImage)
+                    Glide.with(cardImage.context).load(exercise.image).into(cardImage)
                     cardTitle.text = exercise.name
-                    //cardRep.text = exercise.repetitions.toString() + " Rep"
-                    //cardWeight.text = exercise.weight.toString() + " Lb"
+                    cardRep.text = exercise.repetitions.toString() + " Rep"
+                    cardWeight.text = exercise.weight.toString() + " Lb"
 
 
 

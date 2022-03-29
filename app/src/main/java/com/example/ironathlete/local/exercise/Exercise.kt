@@ -7,13 +7,13 @@ import java.io.Serializable
 import java.sql.Types
 
 data class ExerciseFirebase(
-    var id : String ="",
-    var name: String="",
-    var image: String="",
-    var repetitions: Int=0,
-    var weight: Float=0f,
-    var description: String="",
-    var gif : String=""):Serializable
+    val id : String? = null,
+    val name: String? = null,
+    val image: String? = null,
+    val repetitions: Int? = null,
+    val weight: Float? = null,
+    val description: String? = null,
+    val gif : String? = null):Serializable
 
 
 

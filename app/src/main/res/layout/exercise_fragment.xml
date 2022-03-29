@@ -21,7 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <pl.droidsonroids.gif.GifImageView
+    <ImageView
         android:id="@+id/exercise_image"
         android:layout_width="368dp"
         android:layout_height="265dp"

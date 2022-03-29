@@ -6,12 +6,16 @@ import java.io.Serializable
 import java.sql.Types
 
 data class MealObject(
-    var id: String = "",
-    var background: String,
-    var nameMeal: String,
-    var numberMeal: Int,
-    var preparationMeal: String,
-    var proteinsMeatMeal: Double,
-    var carbsFloursMeal: Double,
-    var richFatMeal: Double,
+   var mid: String? = "",
+   var amountCarbs: Double? = null,
+   var amountFats: Double? = null,
+   var amountProtein: Double? = null,
+   var carbsId: String? = "",
+   var description: String? = "",
+   var proteinId: String? = "",
+   var fatsId: String? = "",
+   var image: String? ="",
+   var ingredients: String? = "",
+   var name: String? = "",
+   var preparation: String? = ""
 ): Serializable

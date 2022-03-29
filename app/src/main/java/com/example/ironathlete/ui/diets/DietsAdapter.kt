@@ -7,10 +7,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.ironathlete.R
 import com.example.ironathlete.databinding.MealCardItemBinding
 import com.example.ironathlete.local.diet.mealItem
+import com.example.ironathlete.server.MealObject
+import com.squareup.picasso.Picasso
 
 class DietsAdapter (
-    private val dietList: ArrayList<mealItem>,
-    private val onClickListener:(mealItem) -> Unit
+    private val dietList: ArrayList<MealObject>,
+    private val onClickListener:(MealObject) -> Unit
     ): RecyclerView.Adapter<DietsAdapter.DietViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DietViewHolder {
@@ -25,16 +27,23 @@ class DietsAdapter (
         holder.bind(meal,onClickListener)
     }
 
+    fun appendItems(newList: ArrayList<MealObject>) {
+        dietList.clear()
+        dietList.addAll(newList)
+        notifyDataSetChanged()
+    }
+
     override fun getItemCount(): Int = dietList.size
 
     class DietViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         // ViewHolder se encarga de pintar, acá dentro vamos a colocar la informacion de nuetro ItemView
+
         private val binding = MealCardItemBinding.bind(itemView)
-        fun bind(meal: mealItem, onClickListener:(mealItem) -> Unit){
+        fun bind(meal: MealObject, onClickListener:(MealObject) -> Unit){
             with(binding){
-                cardBackground.setImageResource(meal.background)
-                cardTitle.text = meal.nameMeal
-                cardDescription.text= "Meal "+meal.numberMeal.toString()
+                Picasso.get().load(meal.image).into(cardBackground);
+                cardTitle.text = meal.name
+                cardDescription.text = meal.description
             }
 
             itemView.setOnClickListener{

@@ -96,9 +96,23 @@ class MainActivity : AppCompatActivity() {
     public fun getUserObject(): UserObject{
         return currentUser
     }
-
     public fun setUserObject(user: UserObject){
         currentUser = user
-        Log.d("User created", "Se actualizo el usuario correctamente")
     }
+
+    public fun getCaloriesObjective(): Double? {
+        return currentUser.caloricObjective
+    }
+
+    public fun getCarbsRequirenment(): Double? {
+        return currentUser.requiredCarbs
+    }
+    public fun getProteinRequirenment(): Double? {
+        return currentUser.requiredProtein
+    }
+    public fun getFatsRequirenment(): Double? {
+        return currentUser.requiredFats
+    }
+
+
 }

@@ -41,7 +41,7 @@ class DietsAdapter (
         private val binding = MealCardItemBinding.bind(itemView)
         fun bind(meal: MealObject, onClickListener:(MealObject) -> Unit){
             with(binding){
-                Picasso.get().load(meal.image).into(cardBackground);
+                //Picasso.get().load(meal.image).into(cardBackground);
                 cardTitle.text = meal.name
                 cardDescription.text = meal.description
             }

@@ -1,9 +1,9 @@
 package com.example.ironathlete.ui.diets
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.ironathlete.server.IngredientObject
 import com.example.ironathlete.server.MealObject
 import com.example.ironathlete.server.ServerRepositories.ServerFoodRepository
 import com.google.firebase.firestore.ktx.toObject
@@ -14,85 +14,57 @@ import kotlinx.coroutines.launch
 class DietsViewModel : ViewModel() {
 
     private var serverFoodRepository = ServerFoodRepository()
-    private var mealList : ArrayList<MealObject> = ArrayList()
-    private var ingrendientList = mutableMapOf<String,IngredientObject>()
+    private var mealList: ArrayList<MealObject> = ArrayList()
     private var amountProtein = 0.0
     private var amountCarbs = 0.0
     private var amountFats = 0.0
 
-    private val loadMealsFromServer : MutableLiveData<Boolean> = MutableLiveData()
-    val loadMealsFromServerDone: LiveData<Boolean> =loadMealsFromServer
+    private val loadMealsFromServer: MutableLiveData<ArrayList<MealObject>> = MutableLiveData()
+    val loadMealsFromServerDone: LiveData<ArrayList<MealObject>> = loadMealsFromServer
 
-    private val setMealsInServer : MutableLiveData<Boolean> = MutableLiveData()
-    val setMealsInServerDone: LiveData<Boolean> =setMealsInServer
+    private val setMealsInServer: MutableLiveData<Boolean> = MutableLiveData()
+    val setMealsInServerDone: LiveData<Boolean> = setMealsInServer
 
-    private val ingredientLoaded : MutableLiveData<Boolean> = MutableLiveData()
-    val ingredientLoadedDone: LiveData<Boolean> = ingredientLoaded
-
-    private val calculatedAmountFoodComplete : MutableLiveData<ArrayList<MealObject>> = MutableLiveData()
-    val calculatedAmountFoodCompleteDone: LiveData<ArrayList<MealObject>> = calculatedAmountFoodComplete
 
     fun loadMealsFromServer() {
-        GlobalScope.launch(Dispatchers.IO){
-            val querySnapshot=serverFoodRepository.loadMeals()
-            for(document in querySnapshot){
+        //mealList.clear()
+        loadMealsFromServer.postValue(null)
+        GlobalScope.launch(Dispatchers.IO) {
+            val querySnapshot = serverFoodRepository.loadMeals()
+
+            for (document in querySnapshot) {
                 val mealServer: MealObject = document.toObject<MealObject>()
-                mealServer.amountProtein = amountProtein/4
-                mealServer.amountCarbs=amountCarbs/4
-                mealServer.amountFats = amountFats/4
+                mealServer.amountProtein = amountProtein / 4
+                mealServer.amountCarbs = amountCarbs / 4
+                mealServer.amountFats = amountFats / 4
                 mealList.add(mealServer)
             }
-            loadMealsFromServer.postValue(true)
+            Log.d("DATA", mealList.toString())
+            loadMealsFromServer.postValue(mealList)
         }
+
+        //Log.d("DATA",mealList.toString())
     }
 
-    fun setProteinAmount(protein: Double){
+    fun setProteinAmount(protein: Double) {
         amountProtein = protein
     }
-    fun setCarbsAmount(carbs: Double){
+
+    fun setCarbsAmount(carbs: Double) {
         amountCarbs = carbs
     }
-    fun setFatsAmount(fats: Double){
+
+    fun setFatsAmount(fats: Double) {
         amountFats = fats
-    }
-
-    fun getIngredients(){
-        GlobalScope.launch(Dispatchers.IO){
-            val allsIngredient = serverFoodRepository.getIngredient()
-            for (ingredient in allsIngredient){
-                val objectIngrendient = ingredient.toObject<IngredientObject>()
-                ingrendientList[objectIngrendient.foodId.toString()] = objectIngrendient
-            }
-            ingredientLoaded.postValue(true)
-        }
-    }
-
-    fun calculateAmountFood(){
-        for(meal in mealList){
-            var grProtein = ingrendientList[meal.proteinId]?.amount!! * meal.amountProtein!! / ingrendientList[meal.proteinId]?.intake!!
-            var grCarbs = ingrendientList[meal.carbsId]?.amount!! * meal.amountCarbs!! / ingrendientList[meal.carbsId]?.intake!!
-            var grFats = ingrendientList[meal.fatsId]?.amount!! * meal.amountFats!! / ingrendientList[meal.fatsId]?.intake!!
-            var aux = " gr de "
-            grProtein = String.format("%.2f",grProtein).toDouble()
-            grCarbs = String.format("%.2f",grCarbs).toDouble()
-            grFats = String.format("%.2f",grFats).toDouble()
-
-            aux =
-                if(ingrendientList[meal.carbsId]?.name == "tajada, pan tajado integral" || ingrendientList[meal.proteinId]?.name == "Huevo AA") " unidades de "
-                else " gr de "
-
-            meal.ingredients = grProtein.toString()+aux+ingrendientList[meal.proteinId]?.name+". \n"+grCarbs.toString()+aux+ingrendientList[meal.carbsId]?.name+". \n"+grFats.toString()+aux+ingrendientList[meal.fatsId]?.name+". \n"+meal.ingredients
-        }
-        calculatedAmountFoodComplete.value=mealList
     }
 
     fun setMealInServer() {
 
         val meal3 = MealObject(
-            mid="",
-            amountCarbs=0.0,
-            amountFats=0.0,
-            amountProtein=0.0,
+            mid = "",
+            amountCarbs = 0.0,
+            amountFats = 0.0,
+            amountProtein = 0.0,
             image = "https://firebasestorage.googleapis.com/v0/b/ironathlete.appspot.com/o/meals%2FfirstMeal%2Ftajadasaguacatehuevo.jpg?alt=media&token=9262e408-681c-4322-aeec-f5529ca9d8a0",
             carbsId = "kjOZjuY0PmlrXZQIg1hn",
             description = "La vieja confiable: el huevo.",
@@ -104,10 +76,10 @@ class DietsViewModel : ViewModel() {
         )
 
         val meal2 = MealObject(
-            mid="",
-            amountCarbs=0.0,
-            amountFats=0.0,
-            amountProtein=0.0,
+            mid = "",
+            amountCarbs = 0.0,
+            amountFats = 0.0,
+            amountProtein = 0.0,
             image = "https://firebasestorage.googleapis.com/v0/b/ironathlete.appspot.com/o/meals%2FsecondMeal%2Fcomida2.jpeg?alt=media&token=73d5af85-e49e-4e6e-b69b-ec676ceaf45f",
             carbsId = "kjOZjuY0PmlrXZQIg1hn",
             description = "Recordando a mamá",
@@ -119,10 +91,10 @@ class DietsViewModel : ViewModel() {
         )
 
         val meal1 = MealObject(
-            mid="",
-            amountCarbs=0.0,
-            amountFats=0.0,
-            amountProtein=0.0,
+            mid = "",
+            amountCarbs = 0.0,
+            amountFats = 0.0,
+            amountProtein = 0.0,
             image = "https://firebasestorage.googleapis.com/v0/b/ironathlete.appspot.com/o/meals%2FthirdMeal%2Fcomida3.jpg?alt=media&token=ec29ecab-d01d-46ae-8b49-a89fdd770c19",
             carbsId = "NY1b70K5UMdWYbGjxFY1",
             description = "Sencillo pero nutritivo.",
@@ -134,10 +106,10 @@ class DietsViewModel : ViewModel() {
         )
 
         val meal4 = MealObject(
-            mid="",
-            amountCarbs=0.0,
-            amountFats=0.0,
-            amountProtein=0.0,
+            mid = "",
+            amountCarbs = 0.0,
+            amountFats = 0.0,
+            amountProtein = 0.0,
             image = "https://firebasestorage.googleapis.com/v0/b/ironathlete.appspot.com/o/meals%2FfourthMeal%2Fcomida4.png?alt=media&token=ea7b4c94-9d68-4128-b6b7-f45befdc99b0",
             carbsId = "ZRfOQYxjoMr3NL9aBX5D",
             description = "Internacionaliza tu cocina.",
@@ -154,7 +126,7 @@ class DietsViewModel : ViewModel() {
         arrayMealforSet.add(meal3)
         arrayMealforSet.add(meal4)
 
-        GlobalScope.launch(Dispatchers.IO){
+        GlobalScope.launch(Dispatchers.IO) {
             for (i in arrayMealforSet) serverFoodRepository.setMealInServer(i)
             setMealsInServer.postValue(true)
         }

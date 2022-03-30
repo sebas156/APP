@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
 import com.example.ironathlete.R
 import com.example.ironathlete.databinding.FragmentDetailMealBinding
+import com.example.ironathlete.server.MealObject
 import com.squareup.picasso.Picasso
 
 class DetailMealFragment : Fragment() {
@@ -35,26 +36,32 @@ class DetailMealFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val informationMeal = args.mealInformation
+        detailMealViewModel.ingredientLoadedDone.observe(viewLifecycleOwner){
+            onIngredientLoadedDoneSuscribe()
+        }
 
+        detailMealViewModel.calculatedAmountFoodCompleteDone.observe(viewLifecycleOwner){
+                result->
+            onCalculatedAmountFoodCompleteDoneSuscribe(result)
+        }
+
+        detailMealViewModel.getIngredients()
+    }
+
+    private fun onCalculatedAmountFoodCompleteDoneSuscribe(result: String?) {
+
+        val informationMeal = args.mealInformation
+        informationMeal.ingredients=result
         with(detailMealBinding){
             titlePreparation.text = informationMeal.name
             Picasso.get().load(informationMeal.image).into(foodImageView)
             ingredientsAmountsTextView.text = informationMeal.ingredients
             preparationTextView.text = informationMeal.preparation
-            Log.d("MealObject",informationMeal.mid.toString())
-            Log.d("MealObject",informationMeal.amountCarbs.toString())
-            Log.d("MealObject",informationMeal.amountFats.toString())
-            Log.d("MealObject",informationMeal.amountProtein.toString())
-            Log.d("MealObject",informationMeal.carbsId.toString())
-            Log.d("MealObject",informationMeal.description.toString())
-            Log.d("MealObject",informationMeal.proteinId.toString())
-            Log.d("MealObject",informationMeal.fatsId.toString())
-            Log.d("MealObject",informationMeal.image.toString())
-            Log.d("MealObject",informationMeal.ingredients.toString())
-            Log.d("MealObject",informationMeal.name.toString())
-            Log.d("MealObject",informationMeal.preparation.toString())
         }
+    }
+
+    private fun onIngredientLoadedDoneSuscribe() {
+        detailMealViewModel.calculateAmountFood(args.mealInformation)
     }
 
 }

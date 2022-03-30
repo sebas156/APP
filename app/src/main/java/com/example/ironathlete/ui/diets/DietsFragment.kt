@@ -1,21 +1,18 @@
 package com.example.ironathlete.ui.diets
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.ironathlete.R
 import com.example.ironathlete.databinding.FragmentDietsBinding
-import com.example.ironathlete.local.diet.mealItem
 import com.example.ironathlete.server.MealObject
 import com.example.ironathlete.ui.main.MainActivity
-import java.sql.Types.NULL
 
 class DietsFragment : Fragment() {
 
@@ -23,6 +20,7 @@ class DietsFragment : Fragment() {
     private lateinit var dietsViewModel: DietsViewModel
     private lateinit var dietsAdapter: DietsAdapter
     private lateinit var activity: MainActivity
+
     //private var dietsList: ArrayList<mealItem> = ArrayList() Room
     private var mealsList: ArrayList<MealObject> = ArrayList()
 
@@ -31,7 +29,7 @@ class DietsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         activity = getActivity() as MainActivity
-        dietsBinding = FragmentDietsBinding.inflate(inflater,container,false)
+        dietsBinding = FragmentDietsBinding.inflate(inflater, container, false)
         dietsViewModel = ViewModelProvider(this)[DietsViewModel::class.java]
         return dietsBinding.root
     }
@@ -39,63 +37,52 @@ class DietsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        dietsViewModel.loadMealsFromServerDone.observe(viewLifecycleOwner){
-            onLoadMealsFromServerDoneSuscribe()
+        dietsViewModel.loadMealsFromServerDone.observe(viewLifecycleOwner) { result ->
+            onLoadMealsFromServerDoneSuscribe(result)
         }
 
-        dietsViewModel.setMealsInServerDone.observe(viewLifecycleOwner){
+        dietsViewModel.setMealsInServerDone.observe(viewLifecycleOwner) {
             onSetMealsInServerDoneSuscribe()
-        }
-
-        dietsViewModel.ingredientLoadedDone.observe(viewLifecycleOwner){
-            onIngredientLoadedDoneSuscribe()
-        }
-
-        dietsViewModel.calculatedAmountFoodCompleteDone.observe(viewLifecycleOwner){
-            result->
-            onCalculatedAmountFoodCompleteDoneSuscribe(result)
         }
 
         activity.getProteinRequirenment()?.let { dietsViewModel.setProteinAmount(it) }
         activity.getCarbsRequirenment()?.let { dietsViewModel.setCarbsAmount(it) }
         activity.getFatsRequirenment()?.let { dietsViewModel.setFatsAmount(it) }
 
-        mealsList.clear()
 
         //dietsViewModel.setMealInServer()
 
         dietsViewModel.loadMealsFromServer()
 
         val manager = LinearLayoutManager(this@DietsFragment.requireContext())
-        val decorator = DividerItemDecoration(this@DietsFragment.requireContext(),manager.orientation)
-        dietsAdapter= DietsAdapter(mealsList) { onItemSelected(it) }
-        dietsBinding.DietsAvailables.apply{
+        val decorator =
+            DividerItemDecoration(this@DietsFragment.requireContext(), manager.orientation)
+        dietsAdapter = DietsAdapter(mealsList) { onItemSelected(it) }
+        dietsBinding.DietsAvailables.apply {
             layoutManager = manager
-            adapter=dietsAdapter
+            adapter = dietsAdapter
             addItemDecoration(decorator)
             setHasFixedSize(false)
         }
     }
 
-    private fun onCalculatedAmountFoodCompleteDoneSuscribe(result: ArrayList<MealObject>?) {
-        mealsList= result!!
+    private fun onSetMealsInServerDoneSuscribe() {
+        Log.d("Setted", "Todas las recetas fueran cargadas en firabase.")
+    }
+
+    private fun onLoadMealsFromServerDoneSuscribe(result: ArrayList<MealObject>) {
+        if (result != null) {
+            mealsList = result
+        }
         dietsAdapter.appendItems(mealsList)
     }
 
-    private fun onIngredientLoadedDoneSuscribe() {
-        dietsViewModel.calculateAmountFood()
-    }
-
-    private fun onSetMealsInServerDoneSuscribe() {
-        Log.d("Setted","Todas las recetas fueran cargadas en firabase.")
-    }
-
-    private fun onLoadMealsFromServerDoneSuscribe() {
-        dietsViewModel.getIngredients()
-    }
-
-    private fun onItemSelected(meal: MealObject){
-        findNavController().navigate(DietsFragmentDirections.actionDietsFragmentToDetailMealFragment(meal))
+    private fun onItemSelected(meal: MealObject) {
+        findNavController().navigate(
+            DietsFragmentDirections.actionDietsFragmentToDetailMealFragment(
+                meal
+            )
+        )
     }
 
 }

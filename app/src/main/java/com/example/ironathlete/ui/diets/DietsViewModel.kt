@@ -1,6 +1,5 @@
 package com.example.ironathlete.ui.diets
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -70,7 +69,6 @@ class DietsViewModel : ViewModel() {
 
     fun calculateAmountFood(){
         for(meal in mealList){
-            Log.d("AQUI",ingrendientList[meal.proteinId]?.amount.toString())
             var grProtein = ingrendientList[meal.proteinId]?.amount!! * meal.amountProtein!! / ingrendientList[meal.proteinId]?.intake!!
             var grCarbs = ingrendientList[meal.carbsId]?.amount!! * meal.amountCarbs!! / ingrendientList[meal.carbsId]?.intake!!
             var grFats = ingrendientList[meal.fatsId]?.amount!! * meal.amountFats!! / ingrendientList[meal.fatsId]?.intake!!

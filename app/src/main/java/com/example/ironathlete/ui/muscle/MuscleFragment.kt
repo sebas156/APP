@@ -10,14 +10,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ironathlete.R
 import com.example.ironathlete.databinding.FragmentMuscleBinding
 import com.example.ironathlete.local.exercise.ExerciseFirebase
+import com.example.ironathlete.ui.exerciseDetails.ExerciseFragmentArgs
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
+import com.example.ironathlete.databinding.RoutineDayFragmentBinding
 import java.sql.Types.NULL
 
 //import com.example.ironathlete.ui.muscle.MuscleFragmentDirections
@@ -35,6 +38,8 @@ class MuscleFragment : Fragment() {
     private var exerciseDayIds: ArrayList<String> = ArrayList()
     private var exerciseIds: ArrayList<String> = ArrayList()
 
+    private val args : MuscleFragmentArgs by navArgs()
+
     val db = Firebase.firestore
     var rutinesRef = db.collection("rutines")
     var exerciseDayRef = db.collection("exercises_day")
@@ -47,6 +52,36 @@ class MuscleFragment : Fragment() {
     ): View? {
         muscleBinding = FragmentMuscleBinding.inflate(inflater,container,false)
         muscleViewModel = ViewModelProvider(this)[MuscleViewModel::class.java]
+
+        val routineDay = args.routineDay
+
+        Log.i("query result", routineDay.toString())
+
+        exercisesRef
+           //.whereIn("id", routineDay.exercisesDayList!!.keys as ArrayList<String>)
+            .addSnapshotListener { value, error -> run {
+
+                if (error != null) {
+                    Log.w(TAG, "Listen failed.", error)
+                    return@addSnapshotListener
+                }
+
+                for (exercise in value!!) {
+                    if (ArrayList(routineDay.exercisesList!!.keys).contains(exercise.id)) {
+                        exerciseFList.add(exercise.toObject<ExerciseFirebase>())
+                        Log.i("exercise", "${exerciseFList[0].id} = ${exerciseFList[0].name}")
+
+                        muscleAdapter.setExercises(exerciseFList)
+                        muscleBinding.ExercisesAvailable.apply{
+                            layoutManager = manager
+                            adapter = muscleAdapter
+                            addItemDecoration(decorator)
+                            setHasFixedSize(false)
+                        }
+                    }
+
+                }
+            }}
 
         //rutinesRef.document("GXVeOpe4E6MbTtBIgI2A").get()
         /*exercisesRef.get()
@@ -62,7 +97,7 @@ class MuscleFragment : Fragment() {
         /*var rutineChildEventListener = object: ChildEventListener {
 
         }*/
-        rutinesRef
+        /*rutinesRef
             .whereEqualTo("name", "RutinaGym")
             .get()
             .addOnSuccessListener { documents -> run {
@@ -115,7 +150,7 @@ class MuscleFragment : Fragment() {
                                 }
                             }}
                     } }
-            } }
+            } }*/
 
         //exerciseList=ArrayList()
 

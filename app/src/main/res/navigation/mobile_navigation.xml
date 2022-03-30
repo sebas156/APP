@@ -15,6 +15,19 @@
             app:destination="@id/infoUserFragment" />
     </fragment>
     <fragment
+        android:id="@+id/routineDayFragment"
+        android:name="com.example.ironathlete.ui.routine.RoutineDayFragment"
+        android:label="routine_day_fragment"
+        tools:layout="@layout/routine_day_fragment">
+        <action
+            android:id="@+id/action_routineDayFragment_to_muscleFragment"
+            app:destination="@id/muscleFragment" >
+            <argument
+                android:name="routineDay"
+                app:argType="com.example.ironathlete.local.routineDay.RoutineDay" />
+        </action>
+    </fragment>
+    <fragment
         android:id="@+id/muscleFragment"
         android:name="com.example.ironathlete.ui.muscle.MuscleFragment"
         android:label="fragment_muscle"
@@ -26,6 +39,12 @@
                 android:name="exerciseInformation"
                 app:argType="com.example.ironathlete.local.exercise.ExerciseFirebase" />
         </action>
+        <argument
+            android:name="routineDay"
+            app:argType="com.example.ironathlete.local.routineDay.RoutineDay" />
+        <action
+            android:id="@+id/action_muscleFragment_to_routineDayFragment"
+            app:destination="@id/routineDayFragment" />
     </fragment>
     <fragment
         android:id="@+id/exerciseFragment"

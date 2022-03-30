@@ -1,5 +1,6 @@
 package com.example.ironathlete.ui.diets
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -69,15 +70,20 @@ class DietsViewModel : ViewModel() {
 
     fun calculateAmountFood(){
         for(meal in mealList){
+            Log.d("AQUI",ingrendientList[meal.proteinId]?.amount.toString())
             var grProtein = ingrendientList[meal.proteinId]?.amount!! * meal.amountProtein!! / ingrendientList[meal.proteinId]?.intake!!
             var grCarbs = ingrendientList[meal.carbsId]?.amount!! * meal.amountCarbs!! / ingrendientList[meal.carbsId]?.intake!!
             var grFats = ingrendientList[meal.fatsId]?.amount!! * meal.amountFats!! / ingrendientList[meal.fatsId]?.intake!!
-
+            var aux = " gr de "
             grProtein = String.format("%.2f",grProtein).toDouble()
             grCarbs = String.format("%.2f",grCarbs).toDouble()
             grFats = String.format("%.2f",grFats).toDouble()
 
-            meal.ingredients = grProtein.toString()+" gr de "+ingrendientList[meal.proteinId]?.name+". \n"+grCarbs.toString()+" gr de "+ingrendientList[meal.carbsId]?.name+". \n"+grFats.toString()+" gr de "+ingrendientList[meal.fatsId]?.name+". \n"+meal.ingredients
+            aux =
+                if(ingrendientList[meal.carbsId]?.name == "tajada, pan tajado integral" || ingrendientList[meal.proteinId]?.name == "Huevo AA") " unidades de "
+                else " gr de "
+
+            meal.ingredients = grProtein.toString()+aux+ingrendientList[meal.proteinId]?.name+". \n"+grCarbs.toString()+aux+ingrendientList[meal.carbsId]?.name+". \n"+grFats.toString()+aux+ingrendientList[meal.fatsId]?.name+". \n"+meal.ingredients
         }
         calculatedAmountFoodComplete.value=mealList
     }

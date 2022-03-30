@@ -40,13 +40,29 @@ class DietsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         dietsViewModel.loadMealsFromServerDone.observe(viewLifecycleOwner){
-            result ->
-            onLoadMealsFromServerDoneSuscribe(result)
+            onLoadMealsFromServerDoneSuscribe()
+        }
+
+        dietsViewModel.setMealsInServerDone.observe(viewLifecycleOwner){
+            onSetMealsInServerDoneSuscribe()
+        }
+
+        dietsViewModel.ingredientLoadedDone.observe(viewLifecycleOwner){
+            onIngredientLoadedDoneSuscribe()
+        }
+
+        dietsViewModel.calculatedAmountFoodCompleteDone.observe(viewLifecycleOwner){
+            result->
+            onCalculatedAmountFoodCompleteDoneSuscribe(result)
         }
 
         activity.getProteinRequirenment()?.let { dietsViewModel.setProteinAmount(it) }
         activity.getCarbsRequirenment()?.let { dietsViewModel.setCarbsAmount(it) }
         activity.getFatsRequirenment()?.let { dietsViewModel.setFatsAmount(it) }
+
+        mealsList.clear()
+
+        //dietsViewModel.setMealInServer()
 
         dietsViewModel.loadMealsFromServer()
 
@@ -61,15 +77,26 @@ class DietsFragment : Fragment() {
         }
     }
 
-    private fun onLoadMealsFromServerDoneSuscribe(result: ArrayList<MealObject>) {
-        mealsList = result
+    private fun onCalculatedAmountFoodCompleteDoneSuscribe(result: ArrayList<MealObject>?) {
+        mealsList= result!!
         dietsAdapter.appendItems(mealsList)
+    }
+
+    private fun onIngredientLoadedDoneSuscribe() {
+        dietsViewModel.calculateAmountFood()
+    }
+
+    private fun onSetMealsInServerDoneSuscribe() {
+        Log.d("Setted","Todas las recetas fueran cargadas en firabase.")
+    }
+
+    private fun onLoadMealsFromServerDoneSuscribe() {
+        dietsViewModel.getIngredients()
     }
 
     private fun onItemSelected(meal: MealObject){
         findNavController().navigate(DietsFragmentDirections.actionDietsFragmentToDetailMealFragment(meal))
     }
-
 
 }
 

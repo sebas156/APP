@@ -41,15 +41,19 @@ android {
 dependencies {
 
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.1.1'
+
+
     implementation 'com.google.firebase:firebase-auth-ktx:21.0.3'
     implementation 'com.google.firebase:firebase-firestore-ktx:24.1.0'
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
 
     def room_version = "2.4.2"
     implementation "androidx.room:room-runtime:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 
-    implementation 'com.squareup.picasso:picasso:2.71828'
+
 
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.17'
 

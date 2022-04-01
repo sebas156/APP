@@ -41,4 +41,7 @@
     <string name="adolecentExercise">Ejercicio moderado (3-5  días a la semana)</string>
     <string name="adultExercise">Ejercicio fuerte (6-7 días  a la semana)</string>
     <string name="legendExercise">Ejercicio muy fuerte (dos veces al  día)</string>
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="exercise_statistics_fragment">Exercise Statistics</string>
 </resources>

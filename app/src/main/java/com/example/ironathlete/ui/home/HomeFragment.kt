@@ -38,7 +38,7 @@ class HomeFragment : Fragment() {
             }
 
             stadisticsCardView.setOnClickListener {
-
+                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToExerciseStatisticsFragment())
             }
         }
 

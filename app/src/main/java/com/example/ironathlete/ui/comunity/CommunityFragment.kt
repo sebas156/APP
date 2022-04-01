@@ -43,33 +43,6 @@ class CommunityFragment : Fragment() {
 
         communityList=ArrayList()
 
-        communityList.add(
-            Community(
-                "¿Que dias van al Gym?",
-                "Me gustaria conocer personas para ir a entrenar,soy ingeniero civil y me gusta el crossfit",
-                120f,
-                10,
-                userAccount(0,"Dario@gmail.com" ,"*****")
-            )
-        )
-        communityList.add(
-            Community(
-                "¿Les gusta los deportes?",
-                "Me gustaria conocer personas para ir a entrenar,soy ingeniero civil y me gusta el crossfit",
-                125f,
-                34,
-                userAccount(0,"ZoeDoria2015@gmail.com" ,"*****")
-            )
-        )
-        communityList.add(
-            Community(
-                "¿Les gusta Hacer Pierna?",
-                "Me gustaria conocer personas para ir a entrenar,soy ingeniero civil y me gusta el crossfit",
-                170f,
-                50,
-                userAccount(0,"DavidBetanur@gmail.com" ,"*****")
-            )
-        )
 
         val manager = LinearLayoutManager(this@CommunityFragment.requireContext())
         val decorator = DividerItemDecoration(this@CommunityFragment.requireContext(),manager.orientation)

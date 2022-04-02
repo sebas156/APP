@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.ironathlete.R
@@ -49,7 +50,39 @@ class MuscleAdapter (
                     cardRep.text = exercise.repetitions.toString() + " Rep"
                     cardWeight.text = exercise.weight.toString() + " Lb"
 
+                    checkBox.setOnCheckedChangeListener { compoundButton, isChecked ->
+                        if (cardRep.visibility == View.VISIBLE){
+                            cardRep.visibility = View.INVISIBLE
+                            repSpinner.visibility = View.VISIBLE
+                        } else {
+                            cardRep.visibility = View.VISIBLE
+                            repSpinner.visibility = View.INVISIBLE
+                        }
+                        if (cardWeight.visibility == View.VISIBLE) {
+                            cardWeight.visibility = View.INVISIBLE
+                            weightSpinner.visibility = View.VISIBLE
+                        } else {
+                            cardWeight.visibility = View.VISIBLE
+                            weightSpinner.visibility = View.INVISIBLE
+                        }
 
+                    }
+
+                    var weightList = ArrayList<Float>()
+                    for (i in 0 until 200) {
+                        weightList.add(i.toFloat()/2)
+                    }
+
+                    weightSpinner.adapter = ArrayAdapter<Float>(weightSpinner.context, android.R.layout.simple_spinner_item, weightList)
+
+                    var repsList = ArrayList<Int>()
+                    for (i in 0 until 50) {
+                        repsList.add(i)
+                    }
+
+                    repSpinner.adapter = ArrayAdapter<Int>(repSpinner.context, android.R.layout.simple_spinner_item, repsList)
+
+                    //var weightAdapter: ArrayAdapter<String> = ArrayAdapter(, weightSpinner)
 
                     //cardDescription.text= "Meal "+exercise.numberMeal.toString()
                 }

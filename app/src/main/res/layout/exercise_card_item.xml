@@ -25,6 +25,16 @@
         tools:layout_editor_absoluteX="209dp"
         tools:layout_editor_absoluteY="91dp" />
 
+    <Spinner
+        android:id="@+id/rep_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:translationX="200dp"
+        android:translationY="70dp"
+        tools:layout_editor_absoluteX="209dp"
+        tools:layout_editor_absoluteY="91dp"
+        android:visibility="invisible"></Spinner>
+
     <TextView
         android:id="@+id/card_weight"
         android:layout_width="wrap_content"
@@ -34,6 +44,16 @@
         android:translationY="70dp"
         tools:layout_editor_absoluteX="318dp"
         tools:layout_editor_absoluteY="91dp" />
+
+    <Spinner
+        android:id="@+id/weight_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:translationX="300dp"
+        android:translationY="70dp"
+        tools:layout_editor_absoluteX="318dp"
+        tools:layout_editor_absoluteY="91dp"
+        android:visibility="invisible"></Spinner>
 
     <TextView
         android:id="@+id/card_title"

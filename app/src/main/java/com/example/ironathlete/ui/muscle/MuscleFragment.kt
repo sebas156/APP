@@ -9,6 +9,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.Spinner
+import androidx.core.view.get
+import androidx.core.view.size
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -21,6 +25,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.example.ironathlete.databinding.RoutineDayFragmentBinding
+import com.example.ironathlete.local.statistics.ExerciseStatistics
 import java.sql.Types.NULL
 
 //import com.example.ironathlete.ui.muscle.MuscleFragmentDirections
@@ -32,6 +37,8 @@ class MuscleFragment : Fragment() {
     private lateinit var muscleAdapter: MuscleAdapter
     private lateinit var manager: LinearLayoutManager
     private lateinit var decorator: DividerItemDecoration
+    private lateinit var itemHolder: MuscleAdapter.MuscleViewHolder
+
 
     //private var exerciseList: ArrayList<Exercise> = ArrayList()
     private var exerciseFList: ArrayList<ExerciseFirebase> = ArrayList()
@@ -44,7 +51,10 @@ class MuscleFragment : Fragment() {
     var rutinesRef = db.collection("rutines")
     var exerciseDayRef = db.collection("exercises_day")
     var exercisesRef = db.collection("exercises")
+    var statisticsRef = db.collection("example")
 
+    var exerciseWeight: Double = 0.0
+    var exerciseReps: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -271,6 +281,31 @@ class MuscleFragment : Fragment() {
             adapter = muscleAdapter
             addItemDecoration(decorator)
             setHasFixedSize(false)
+        }
+
+        muscleBinding.saveButton.setOnClickListener {
+            for (i in 0 until muscleBinding.ExercisesAvailable.size) {
+                //if muscleBinding.
+                itemHolder = muscleBinding.ExercisesAvailable.findViewHolderForAdapterPosition(i) as MuscleAdapter.MuscleViewHolder
+                exerciseWeight = (itemHolder.itemView.findViewById<Spinner>(R.id.weight_spinner).selectedItem as Float).toDouble()
+                exerciseReps = itemHolder.itemView.findViewById<Spinner>(R.id.rep_spinner).selectedItem as Int
+
+                var newDoc = statisticsRef.document()
+                statisticsRef
+                    .whereEqualTo("excercise_id", exerciseFList.get(i).id)
+                    .get()
+                newDoc.set(ExerciseStatistics(
+                    id = newDoc.id,
+                    excercise_id = exerciseFList.get(i).id,
+                    excercise_name = exerciseFList.get(i).name,
+                    weight = exerciseWeight,
+                    repetitions = exerciseReps
+                ))
+
+                Log.i("here1", exerciseReps.toString())
+                Log.i("here2", exerciseWeight.toString())
+
+            }
         }
     }
 

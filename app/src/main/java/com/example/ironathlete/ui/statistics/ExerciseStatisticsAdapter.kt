@@ -44,8 +44,9 @@ class ExerciseStatisticsAdapter (
                 cardTitle.text = exercise.name
                 cardRep.text = ""
                 cardWeight.text = ""
-
-
+                checkBox.visibility = View.INVISIBLE
+                imageView7.visibility = View.GONE
+                imageView8.visibility = View.GONE
 
                 //cardDescription.text= "Meal "+exercise.numberMeal.toString()
             }

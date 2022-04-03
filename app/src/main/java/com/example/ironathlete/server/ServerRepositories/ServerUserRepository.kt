@@ -57,7 +57,7 @@ class ServerUserRepository {
         return user.get().await()
     }
 
-    suspend fun getUserId(): String? {
+     fun getUserId(): String? {
         return auth.currentUser?.uid
     }
 }

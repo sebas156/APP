@@ -3,7 +3,6 @@ package com.example.ironathlete.server
 import java.io.Serializable
 
 data class UserObject (
-
      var uid: String? ="",
      var email: String?="",
      var fullName: String? = "",
@@ -14,6 +13,8 @@ data class UserObject (
      var hourWorkOut: String? ="",
      var goToGym: Boolean? = null,
      var objetive: String? = "",
+     var caloricRequirement: Double?= null,
+     var caloricObjective: Double? = null,
      var requiredProtein: Double? = null,
      var requiredCarbs: Double? = null,
      var requiredFats: Double? = null,

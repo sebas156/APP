@@ -18,7 +18,7 @@ class RegistroActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         registroBinding = ActivityRegistroBinding.inflate(layoutInflater)
-        registroViewModel = ViewModelProvider(this).get(RegistroViewModel::class.java)
+        registroViewModel = ViewModelProvider(this)[RegistroViewModel::class.java]
         setContentView(registroBinding.root)
 
         registroViewModel.msgDone.observe(this, { message ->

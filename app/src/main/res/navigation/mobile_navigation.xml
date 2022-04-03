@@ -82,7 +82,7 @@
         tools:layout="@layout/fragment_detail_meal" >
         <argument
             android:name="mealInformation"
-            app:argType="com.example.ironathlete.local.diet.mealItem" />
+            app:argType="com.example.ironathlete.server.MealObject" />
         <action
             android:id="@+id/action_detailMealFragment_to_dietsFragment"
             app:destination="@id/dietsFragment" />

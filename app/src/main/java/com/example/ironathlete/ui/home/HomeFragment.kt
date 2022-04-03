@@ -30,8 +30,8 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         with(homeBinding){
-           infoImageView.setImageResource(R.drawable.playa)
-            stadisticsImageView.setImageResource(R.drawable.ciudad)
+           infoImageView.setImageResource(R.drawable.infoperfil)
+            stadisticsImageView.setImageResource(R.drawable.estadistica)
 
             infoUserCardView.setOnClickListener{
                 findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToInfoUserFragment())

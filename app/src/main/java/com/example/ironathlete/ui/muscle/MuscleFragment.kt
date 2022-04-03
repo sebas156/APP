@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.core.view.get
 import androidx.core.view.size
 import androidx.navigation.fragment.findNavController
@@ -46,12 +47,13 @@ class MuscleFragment : Fragment() {
     private var exerciseIds: ArrayList<String> = ArrayList()
 
     private val args : MuscleFragmentArgs by navArgs()
+    var maxDay: Long = 0
 
     val db = Firebase.firestore
     var rutinesRef = db.collection("rutines")
     var exerciseDayRef = db.collection("exercises_day")
     var exercisesRef = db.collection("exercises")
-    var statisticsRef = db.collection("example")
+    var statisticsRef = db.collection("excercise_statistics")
 
     var exerciseWeight: Double = 0.0
     var exerciseReps: Int = 0
@@ -287,23 +289,57 @@ class MuscleFragment : Fragment() {
             for (i in 0 until muscleBinding.ExercisesAvailable.size) {
                 //if muscleBinding.
                 itemHolder = muscleBinding.ExercisesAvailable.findViewHolderForAdapterPosition(i) as MuscleAdapter.MuscleViewHolder
-                exerciseWeight = (itemHolder.itemView.findViewById<Spinner>(R.id.weight_spinner).selectedItem as Float).toDouble()
-                exerciseReps = itemHolder.itemView.findViewById<Spinner>(R.id.rep_spinner).selectedItem as Int
+                var weightAvailable = itemHolder.itemView.findViewById<Spinner>(R.id.weight_spinner).visibility
+                var repsAvailable = itemHolder.itemView.findViewById<Spinner>(R.id.rep_spinner).visibility
 
-                var newDoc = statisticsRef.document()
-                statisticsRef
-                    .whereEqualTo("excercise_id", exerciseFList.get(i).id)
-                    .get()
-                newDoc.set(ExerciseStatistics(
-                    id = newDoc.id,
-                    excercise_id = exerciseFList.get(i).id,
-                    excercise_name = exerciseFList.get(i).name,
-                    weight = exerciseWeight,
-                    repetitions = exerciseReps
-                ))
+                if (weightAvailable == View.VISIBLE && repsAvailable == View.VISIBLE) {
 
-                Log.i("here1", exerciseReps.toString())
-                Log.i("here2", exerciseWeight.toString())
+                    exerciseWeight =
+                        (itemHolder.itemView.findViewById<Spinner>(R.id.weight_spinner).selectedItem as Float).toDouble()
+                    exerciseReps =
+                        itemHolder.itemView.findViewById<Spinner>(R.id.rep_spinner).selectedItem as Int
+
+                    maxDay = 0
+
+                    Log.i("maxDay", maxDay.toString())
+
+                    statisticsRef
+                        .get()
+                        .addOnSuccessListener { documents ->
+                            run {
+                                for (stat in documents) {
+                                    if (stat.data.get("excercise_id") == exerciseFList.get(i).id){
+                                        Log.i("day", stat.data.get("day").toString())
+                                        if (stat.data.get("day") as Long > maxDay) {
+                                            maxDay = stat.data.get("day") as Long
+                                        }
+                                        Log.i("maxDay", maxDay.toString())
+                                    }
+                                }
+                                maxDay += 1
+                                Log.i("maxDay", maxDay.toString())
+                            }
+
+                            var newDoc = statisticsRef.document()
+
+                            var exerciseStatistics: ExerciseStatistics = ExerciseStatistics(
+                                id = newDoc.id,
+                                excercise_id = exerciseFList.get(i).id,
+                                excercise_name = exerciseFList.get(i).name,
+                                day = maxDay.toInt(),
+                                weight = exerciseWeight,
+                                repetitions = exerciseReps
+                            )
+                            Log.i("object is",exerciseStatistics.toString())
+                            newDoc.set(exerciseStatistics)
+                            Toast.makeText(context, "Se han guardado los cambios del día!", Toast.LENGTH_SHORT).show()
+                        }
+
+
+                    Log.i("here1", exerciseReps.toString())
+                    Log.i("here2", exerciseWeight.toString())
+
+                }
 
             }
         }

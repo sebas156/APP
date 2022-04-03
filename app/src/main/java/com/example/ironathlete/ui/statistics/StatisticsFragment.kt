@@ -21,7 +21,7 @@ import com.jjoe64.graphview.series.LineGraphSeries
 class StatisticsFragment : Fragment() {
 
     private var statisticsRepetitionsList: ArrayList<Long> = ArrayList()
-    private var statisticsWeightList: ArrayList<Long> = ArrayList()
+    private var statisticsWeightList: ArrayList<Double> = ArrayList()
     private var weightPoints: ArrayList<DataPoint> = ArrayList()
     private var repetitionPoints: ArrayList<DataPoint> = ArrayList()
     private var seriesWeight: LineGraphSeries<DataPoint> = LineGraphSeries()
@@ -55,14 +55,14 @@ class StatisticsFragment : Fragment() {
                 run {
                     for(statistics in documents) {
                         statisticsRepetitionsList.add(statistics.data.get("repetitions") as Long)
-                        statisticsWeightList.add(statistics.data.get("weight") as Long)
+                        statisticsWeightList.add(statistics.data.get("weight").toString().toDouble())
                     }
                     Log.i("stat1",statisticsRepetitionsList.toString())
                     Log.i("stat1",statisticsWeightList.toString())
 
                     var i: Double = 0.0
                     for (weight in statisticsWeightList) {
-                        weightPoints.add(DataPoint(i, weight.toDouble()))
+                        weightPoints.add(DataPoint(i, weight))
                         i += 1
                         Log.i("weight", weightPoints[(i-1).toInt()].toString())
                     }

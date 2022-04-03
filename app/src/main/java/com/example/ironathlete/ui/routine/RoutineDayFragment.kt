@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ironathlete.databinding.RoutineDayFragmentBinding
 import com.example.ironathlete.local.exercise.ExerciseFirebase
 import com.example.ironathlete.local.routineDay.RoutineDay
+import com.example.ironathlete.server.UserObject
+import com.example.ironathlete.ui.main.MainActivity
 import com.example.ironathlete.ui.muscle.MuscleAdapter
 import com.example.ironathlete.ui.muscle.MuscleFragmentDirections
 import com.google.firebase.firestore.ktx.firestore
@@ -27,6 +29,9 @@ class RoutineDayFragment : Fragment() {
     }
 
     private lateinit var viewModel: RoutineDayViewModel
+
+    private lateinit var activity: MainActivity
+    lateinit var currentUser : UserObject
 
     private lateinit var routineDayBinding: RoutineDayFragmentBinding
     private lateinit var routineDayViewModel: RoutineDayViewModel
@@ -42,17 +47,26 @@ class RoutineDayFragment : Fragment() {
     private var exerciseDayIds: ArrayList<String> = ArrayList()
     private var exerciseDayList: ArrayList<RoutineDay> = ArrayList()
     private var currentRoutineDay: RoutineDay = RoutineDay()
+    private var routineName: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        activity = getActivity() as MainActivity
+        currentUser = activity.getUserObject()
 
         routineDayBinding = RoutineDayFragmentBinding.inflate(inflater, container, false)
         routineDayViewModel = ViewModelProvider(this)[RoutineDayViewModel::class.java]
 
+        if (currentUser.goToGym == true){
+            routineName = "RutinaGym"
+        } else {
+            routineName = "RutinaCasa"
+        }
+
         rutinesRef
-            .whereEqualTo("name", "RutinaGym")
+            .whereEqualTo("name", routineName)
             .get()
             .addOnSuccessListener { documents ->
                 run {

@@ -27,6 +27,8 @@ import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.example.ironathlete.databinding.RoutineDayFragmentBinding
 import com.example.ironathlete.local.statistics.ExerciseStatistics
+import com.example.ironathlete.server.UserObject
+import com.example.ironathlete.ui.main.MainActivity
 import java.sql.Types.NULL
 
 //import com.example.ironathlete.ui.muscle.MuscleFragmentDirections
@@ -39,7 +41,6 @@ class MuscleFragment : Fragment() {
     private lateinit var manager: LinearLayoutManager
     private lateinit var decorator: DividerItemDecoration
     private lateinit var itemHolder: MuscleAdapter.MuscleViewHolder
-
 
     //private var exerciseList: ArrayList<Exercise> = ArrayList()
     private var exerciseFList: ArrayList<ExerciseFirebase> = ArrayList()
@@ -62,6 +63,7 @@ class MuscleFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         muscleBinding = FragmentMuscleBinding.inflate(inflater,container,false)
         muscleViewModel = ViewModelProvider(this)[MuscleViewModel::class.java]
 

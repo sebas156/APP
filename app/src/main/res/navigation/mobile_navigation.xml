@@ -13,6 +13,22 @@
         <action
             android:id="@+id/action_homeFragment_to_infoUserFragment"
             app:destination="@id/infoUserFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_exerciseStatisticsFragment"
+            app:destination="@id/exerciseStatisticsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/routineDayFragment"
+        android:name="com.example.ironathlete.ui.routine.RoutineDayFragment"
+        android:label="routine_day_fragment"
+        tools:layout="@layout/routine_day_fragment">
+        <action
+            android:id="@+id/action_routineDayFragment_to_muscleFragment"
+            app:destination="@id/muscleFragment" >
+            <argument
+                android:name="routineDay"
+                app:argType="com.example.ironathlete.local.routineDay.RoutineDay" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/muscleFragment"
@@ -24,8 +40,14 @@
             app:destination="@id/exerciseFragment" >
             <argument
                 android:name="exerciseInformation"
-                app:argType="com.example.ironathlete.local.exercise.Exercise" />
+                app:argType="com.example.ironathlete.local.exercise.ExerciseFirebase" />
         </action>
+        <argument
+            android:name="routineDay"
+            app:argType="com.example.ironathlete.local.routineDay.RoutineDay" />
+        <action
+            android:id="@+id/action_muscleFragment_to_routineDayFragment"
+            app:destination="@id/routineDayFragment" />
     </fragment>
     <fragment
         android:id="@+id/exerciseFragment"
@@ -34,7 +56,7 @@
         tools:layout="@layout/exercise_fragment" >
         <argument
             android:name="exerciseInformation"
-            app:argType="com.example.ironathlete.local.exercise.Exercise" />
+            app:argType="com.example.ironathlete.local.exercise.ExerciseFirebase" />
         <action
             android:id="@+id/action_exerciseFragment_to_muscleFragment"
             app:destination="@id/muscleFragment" />
@@ -73,6 +95,28 @@
         <action
             android:id="@+id/action_infoUserFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/exerciseStatisticsFragment"
+        android:name="com.example.ironathlete.ui.statistics.ExerciseStatisticsFragment"
+        android:label="@string/exercise_statistics_fragment"
+        tools:layout="@layout/exercise_statistics_fragment" >
+        <action
+            android:id="@+id/action_exerciseStatisticsFragment_to_statisticsFragment"
+            app:destination="@id/statisticsFragment">
+            <argument
+                android:name="exercise"
+                app:argType="com.example.ironathlete.local.exercise.ExerciseFirebase" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/statisticsFragment"
+        android:name="com.example.ironathlete.ui.statistics.StatisticsFragment"
+        android:label="statistics_fragment"
+        tools:layout="@layout/statistics_fragment" >
+        <argument
+            android:name="exercise"
+            app:argType="com.example.ironathlete.local.exercise.ExerciseFirebase" />
     </fragment>
 
 </navigation>

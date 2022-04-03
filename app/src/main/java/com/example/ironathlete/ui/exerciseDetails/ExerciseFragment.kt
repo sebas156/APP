@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
 import com.example.ironathlete.R
 import com.example.ironathlete.databinding.ExerciseFragmentBinding
 
@@ -37,8 +38,9 @@ class ExerciseFragment : Fragment() {
 
         with(exerciseBinding){
             exerciseName.text = informationExercise.name
+            Glide.with(exerciseImage.context).load(informationExercise.gif).into(exerciseImage)
             //exerciseImage.setImageResource(informationExercise.gif)
-            exerciseDescription.text = informationExercise.description
+            descriptionText.text = informationExercise.description
 
         }
     }

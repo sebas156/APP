@@ -25,22 +25,24 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/CommunityAvailable"
-        android:layout_marginTop="20dp"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title_community"
-        />
+        app:layout_constraintVertical_bias="1.0" />
 
-    <ImageButton
+    <Button
+        android:id="@+id/add_foro_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="@id/CommunityAvailable"
-        app:layout_constraintRight_toRightOf="parent"
-        app:srcCompat="@drawable/ic_baseline_post_add_24"></ImageButton>
+        android:layout_marginBottom="50dp"
+        android:text="@string/add_forum"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,7 +20,7 @@
     <string name="user_name_title">NOMBRE DE USUARIO</string>
     <string name="weight">Peso (kg)</string>
     <string name="height">Estatura (cm)</string>
-    <string name="hint_user_name">Nombre y Apellido</string>
+    <string name="hint_user_name">Nombre de usuario</string>
     <string name="male">Hombre</string>
     <string name="female">Mujer</string>
     <string name="gender_selector">Sexo</string>
@@ -43,4 +43,5 @@
     <string name="legendExercise">Ejercicio muy fuerte (dos veces al  día)</string>
     <string name="preparation">Preparacion</string>
     <string name="ingredients">Ingredientes</string>
+    <string name="objetive_label">Objetivo</string>
 </resources>

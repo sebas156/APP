@@ -34,12 +34,7 @@ class CommunityAdapter (
             private val binding = CommunityCardItemBinding.bind(itemView)
             fun bind(community: Community, onClickListener:(Community) -> Unit){
                 with(binding){
-                    cardImage.setImageResource(R.drawable.skipping)
-                    cardName.text = community.user.email
-                    cardLikes.text = community.likes.toString()
-                    cardWeight.text = community.weight.toString() + " Lb"
-                    cardDescription.text = community.description
-                    cardTitle.text = community.title
+
 
 
                     //cardDescription.text= "Meal "+exercise.numberMeal.toString()

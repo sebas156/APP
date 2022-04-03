@@ -1,80 +1,63 @@
 package com.example.ironathlete.ui.comunity
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ironathlete.Community
-import com.example.ironathlete.local.exercise.Exercise
-import com.example.ironathlete.R
 import com.example.ironathlete.databinding.FragmentCommunityBinding
-import com.example.ironathlete.local.user.userAccount
-import com.example.ironathlete.ui.muscle.MuscleAdapter
-import com.example.ironathlete.ui.muscle.MuscleFragmentDirections
+import com.example.ironathlete.server.ComunityObject
+import com.example.ironathlete.ui.main.MainActivity
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
-class CommunityFragment : Fragment() {
+class CommunityFragment : Fragment(), dialogSquare.FinishedDialogSquare{
 
     private lateinit var communityBinding: FragmentCommunityBinding
     private lateinit var communityViewModel: CommunityViewModel
     private lateinit var communityAdapter: CommunityAdapter
-    private var communityList: ArrayList<Community> = ArrayList()
+    private var communityList: ArrayList<ComunityObject> = ArrayList()
+    private lateinit var activity: MainActivity
+
+    private lateinit var dialog: dialogSquare
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        communityBinding= FragmentCommunityBinding.inflate(inflater,container,false)
+        activity = getActivity() as MainActivity
+        communityBinding = FragmentCommunityBinding.inflate(inflater, container, false)
         communityViewModel = ViewModelProvider(this)[CommunityViewModel::class.java]
         return communityBinding.root
     }
 
 
-
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        communityList=ArrayList()
+        communityViewModel.updatedPublicationDone.observe(viewLifecycleOwner){
+            result ->
+            updatedPublicationDoneSuscribe(result)
+        }
 
-        communityList.add(
-            Community(
-                "¿Que dias van al Gym?",
-                "Me gustaria conocer personas para ir a entrenar,soy ingeniero civil y me gusta el crossfit",
-                120f,
-                10,
-                userAccount(0,"Dario@gmail.com" ,"*****")
-            )
-        )
-        communityList.add(
-            Community(
-                "¿Les gusta los deportes?",
-                "Me gustaria conocer personas para ir a entrenar,soy ingeniero civil y me gusta el crossfit",
-                125f,
-                34,
-                userAccount(0,"ZoeDoria2015@gmail.com" ,"*****")
-            )
-        )
-        communityList.add(
-            Community(
-                "¿Les gusta Hacer Pierna?",
-                "Me gustaria conocer personas para ir a entrenar,soy ingeniero civil y me gusta el crossfit",
-                170f,
-                50,
-                userAccount(0,"DavidBetanur@gmail.com" ,"*****")
-            )
-        )
+        communityList = ArrayList()
+
+        communityBinding.addForoButton.setOnClickListener {
+            dialog= dialogSquare(requireContext(),this)
+        }
 
         val manager = LinearLayoutManager(this@CommunityFragment.requireContext())
-        val decorator = DividerItemDecoration(this@CommunityFragment.requireContext(),manager.orientation)
-        communityAdapter= CommunityAdapter(communityList) {}/* onItemSelected(it) }*/
-        communityBinding.CommunityAvailable.apply{
+        val decorator =
+            DividerItemDecoration(this@CommunityFragment.requireContext(), manager.orientation)
+        communityAdapter = CommunityAdapter(communityList) {}/* onItemSelected(it) }*/
+        communityBinding.CommunityAvailable.apply {
             layoutManager = manager
             adapter = communityAdapter
             addItemDecoration(decorator)
@@ -82,8 +65,28 @@ class CommunityFragment : Fragment() {
         }
     }
 
-    private fun onItemSelected(community: Community){
+    private fun updatedPublicationDoneSuscribe(result: ComunityObject?) {
+        if (result != null) {
+            communityList.add(result)
+        }
+    }
+
+
+    private fun onItemSelected(community: Community) {
         //findNavController().navigate(MuscleFragmentDirections.actionMuscleFragmentToExerciseFragment(community))
+    }
+
+    override fun ResultDialogSquare(result: String) {
+        if(result.isEmpty()) Toast.makeText(requireContext(),"El contenido que tiene que publicar debe ser diferente de vacio",Toast.LENGTH_SHORT).show()
+        else{
+            val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+            val date = Date()
+            val fecha: String = dateFormat.format(date)
+            val nameUser = activity.getName()
+            val ageUser = activity.getAge()
+            val objetiveUser = activity.getObjetive()
+            communityViewModel.publicateContent(result,fecha,nameUser,ageUser,objetiveUser)
+        }
     }
 
 }

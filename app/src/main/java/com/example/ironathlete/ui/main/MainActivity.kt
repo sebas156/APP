@@ -114,5 +114,17 @@ class MainActivity : AppCompatActivity() {
         return currentUser.requiredFats
     }
 
+    public fun getName(): String?{
+        return currentUser.fullName
+    }
+
+    public fun getAge(): Int?{
+        return currentUser.age
+    }
+
+    public fun getObjetive(): String?{
+        return currentUser.objetive
+    }
+
 
 }

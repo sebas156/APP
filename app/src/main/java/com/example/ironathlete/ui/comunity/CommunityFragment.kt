@@ -47,7 +47,13 @@ class CommunityFragment : Fragment(), dialogSquare.FinishedDialogSquare{
             updatedPublicationDoneSuscribe(result)
         }
 
-        communityList = ArrayList()
+        communityViewModel.getPublicationsDone.observe(viewLifecycleOwner){
+            result ->
+            getPublicationsDoneSuscribe(result)
+
+        }
+
+        communityViewModel.getAllPublication()
 
         communityBinding.addForoButton.setOnClickListener {
             dialog= dialogSquare(requireContext(),this)
@@ -56,7 +62,7 @@ class CommunityFragment : Fragment(), dialogSquare.FinishedDialogSquare{
         val manager = LinearLayoutManager(this@CommunityFragment.requireContext())
         val decorator =
             DividerItemDecoration(this@CommunityFragment.requireContext(), manager.orientation)
-        communityAdapter = CommunityAdapter(communityList) {}/* onItemSelected(it) }*/
+        communityAdapter = CommunityAdapter(communityList) {onItemSelected(it) }
         communityBinding.CommunityAvailable.apply {
             layoutManager = manager
             adapter = communityAdapter
@@ -65,23 +71,32 @@ class CommunityFragment : Fragment(), dialogSquare.FinishedDialogSquare{
         }
     }
 
+    private fun getPublicationsDoneSuscribe(result: ArrayList<ComunityObject>?) {
+        if(result !=null){
+            communityList=result
+            communityAdapter.appendItems(communityList)
+        }
+    }
+
     private fun updatedPublicationDoneSuscribe(result: ComunityObject?) {
         if (result != null) {
             communityList.add(result)
         }
+        communityAdapter.appendItems(communityList)
     }
 
 
-    private fun onItemSelected(community: Community) {
-        //findNavController().navigate(MuscleFragmentDirections.actionMuscleFragmentToExerciseFragment(community))
+    private fun onItemSelected(community: ComunityObject) {
+        communityViewModel.updatePublication(community)
     }
 
     override fun ResultDialogSquare(result: String) {
         if(result.isEmpty()) Toast.makeText(requireContext(),"El contenido que tiene que publicar debe ser diferente de vacio",Toast.LENGTH_SHORT).show()
         else{
-            val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
-            val date = Date()
-            val fecha: String = dateFormat.format(date)
+            val date = Calendar.getInstance().time
+            val format = "dd/MM/yyyy"
+            var simpleDateFormat = SimpleDateFormat(format)
+            val fecha = simpleDateFormat.format(date).toString()
             val nameUser = activity.getName()
             val ageUser = activity.getAge()
             val objetiveUser = activity.getObjetive()

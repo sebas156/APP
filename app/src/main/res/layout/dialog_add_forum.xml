@@ -13,7 +13,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5">
+        app:layout_constraintTop_toBottomOf="@+id/social_image_view">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/input_add_forum_edit_text"
@@ -48,7 +48,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/social_image_view"
         android:layout_width="0dp"
         android:layout_height="100dp"
         android:scaleType="fitXY"

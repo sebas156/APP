@@ -71,9 +71,7 @@ class DietsFragment : Fragment() {
     }
 
     private fun onLoadMealsFromServerDoneSuscribe(result: ArrayList<MealObject>) {
-        if (result != null) {
-            mealsList = result
-        }
+        mealsList = result
         dietsAdapter.appendItems(mealsList)
     }
 

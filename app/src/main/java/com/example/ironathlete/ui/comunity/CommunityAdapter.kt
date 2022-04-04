@@ -4,37 +4,31 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.core.view.isVisible
-import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ironathlete.Community
-import com.example.ironathlete.local.exercise.Exercise
 import com.example.ironathlete.R
 import com.example.ironathlete.databinding.CommunityCardItemBinding
-import com.example.ironathlete.databinding.ExerciseCardItemBinding
 import com.example.ironathlete.server.ComunityObject
-import kotlinx.coroutines.NonDisposableHandle.parent
-import java.security.AccessController.getContext
 
-class CommunityAdapter (
+class CommunityAdapter(
     private val communityList: ArrayList<ComunityObject>,
-    private val onClickListener:(ComunityObject) -> Unit
-    ): RecyclerView.Adapter<CommunityAdapter.CommunityViewHolder>(){
+    private val onClickListener: (ComunityObject) -> Unit,
+    private val onClickListenerIndicator: (Boolean) -> Unit
+) : RecyclerView.Adapter<CommunityAdapter.CommunityViewHolder>() {
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommunityViewHolder {
-            //Tenemos que instanciar una vista.
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommunityViewHolder {
+        //Tenemos que instanciar una vista.
 
-            val view = LayoutInflater.from(parent.context).inflate(R.layout.community_card_item,parent,false)
-            return CommunityViewHolder(view)
-        }
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.community_card_item, parent, false)
+        return CommunityViewHolder(view)
+    }
 
-        override fun onBindViewHolder(holder: CommunityViewHolder, position: Int) {
-            val community = communityList[position]
-            holder.bind(community,onClickListener)
-        }
+    override fun onBindViewHolder(holder: CommunityViewHolder, position: Int) {
+        val community = communityList[position]
+        holder.bind(community, onClickListener,onClickListenerIndicator)
+    }
 
-        override fun getItemCount(): Int = communityList.size
+    override fun getItemCount(): Int = communityList.size
 
     fun appendItems(newList: ArrayList<ComunityObject>) {
         communityList.clear()
@@ -42,61 +36,68 @@ class CommunityAdapter (
         notifyDataSetChanged()
     }
 
-    class CommunityViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-            // ViewHolder se encarga de pintar, acá dentro vamos a colocar la informacion de nuetro ItemView
-            private val binding = CommunityCardItemBinding.bind(itemView)
-            fun bind(community: ComunityObject, onClickListener:(ComunityObject) -> Unit){
-                with(binding){
-                    displayDateTextView.text=community.date
-                    displayAgeTextView.text=community.ageUser.toString()
-                    displayContentTextView.text=community.content
-                    dislayNumberLikesTextView.text=community.numberLikes.toString()
-                    displayObjetiveTextView.text=community.objetive
-                    numberCommentsTextView.text=community.comments?.size.toString()
-                    userNameTextView.text=community.userName
+    class CommunityViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-                    likesImageView.setOnClickListener{
-                        community.numberLikes = community.numberLikes?.plus(1)
-                        dislayNumberLikesTextView.text=community.numberLikes.toString()
+        // ViewHolder se encarga de pintar, acá dentro vamos a colocar la informacion de nuetro ItemView
+        private val binding = CommunityCardItemBinding.bind(itemView)
+        fun bind(community: ComunityObject, onClickListener: (ComunityObject) -> Unit, onClickListenerIndicator: (Boolean) -> Unit) {
+            with(binding) {
+                displayDateTextView.text = community.date
+                displayAgeTextView.text = community.ageUser.toString()
+                displayContentTextView.text = community.content
+                dislayNumberLikesTextView.text = community.numberLikes.toString()
+                displayObjetiveTextView.text = community.objetive
+                numberCommentsTextView.text = community.comments?.size.toString()
+                userNameTextView.text = community.userName
+
+                likesImageView.setOnClickListener {
+                    community.numberLikes = community.numberLikes?.plus(1)
+                    dislayNumberLikesTextView.text = community.numberLikes.toString()
+                    onClickListener(community)
+                }
+
+                closeAnswerButton.setOnClickListener {
+                    onClickListenerIndicator(true)
+                    contentCommentsTestView.visibility = View.GONE
+                    addNewAnswerTextInputLayout.visibility = View.GONE
+                    saveNewCommentButton.visibility = View.GONE
+                    closeAnswerButton.visibility = View.GONE
+                }
+
+                saveNewCommentButton.setOnClickListener {
+                    val ans = writeNewAnswerTextEdit.text.toString()
+                    if (ans.isEmpty()) Toast.makeText(
+                        itemView.context,
+                        "Tu respuesta no puede estar vacía",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    else {
+                        contentCommentsTestView.text = ans
+                        community.comments?.add(ans)
+                        numberCommentsTextView.text = community.comments?.size.toString()
+                        var total = "RESPUESTAS: \n\n"
+                        for (comment in community.comments!!) {
+                            total += comment + "\n\n"
+                        }
+                        contentCommentsTestView.text = total
                         onClickListener(community)
                     }
+                }
 
-                    closeAnswerButton.setOnClickListener {
-                        contentCommentsTestView.visibility = View.GONE
-                        addNewAnswerTextInputLayout.visibility = View.GONE
-                        saveNewCommentButton.visibility = View.GONE
-                        closeAnswerButton.visibility = View.GONE
+                commentsImageView.setOnClickListener {
+                    onClickListenerIndicator(false)
+                    contentCommentsTestView.visibility = View.VISIBLE
+                    addNewAnswerTextInputLayout.visibility = View.VISIBLE
+                    saveNewCommentButton.visibility = View.VISIBLE
+                    closeAnswerButton.visibility = View.VISIBLE
+                    var total = "RESPUESTAS: \n\n"
+                    for (comment in community.comments!!) {
+                        total += comment + "\n\n"
                     }
+                    contentCommentsTestView.text = total
 
-                    saveNewCommentButton.setOnClickListener {
-                        val ans = writeNewAnswerTextEdit.text.toString()
-                        if(ans.isEmpty()) Toast.makeText(itemView.context,"Tu respuesta no puede estar vacía",Toast.LENGTH_SHORT).show()
-                        else {
-                            contentCommentsTestView.text=ans
-                            community.comments?.add(ans)
-                            numberCommentsTextView.text=community.comments?.size.toString()
-                            var total = "RESPUESTAS: \n\n"
-                            for(comment in community.comments!!){
-                                total+=comment+"\n\n"
-                            }
-                            contentCommentsTestView.text=total
-                            onClickListener(community)
-                        }
-                    }
-
-                    commentsImageView.setOnClickListener {
-                        contentCommentsTestView.visibility = View.VISIBLE
-                        addNewAnswerTextInputLayout.visibility = View.VISIBLE
-                        saveNewCommentButton.visibility = View.VISIBLE
-                        closeAnswerButton.visibility = View.VISIBLE
-                        var total = ""
-                        for(comment in community.comments!!){
-                            total+=comment+"\n\n"
-                        }
-                        contentCommentsTestView.text=total
-
-                    }
                 }
             }
         }
+    }
 }

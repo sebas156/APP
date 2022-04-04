@@ -1,6 +1,7 @@
 package com.example.ironathlete.ui.comunity
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,6 +54,8 @@ class CommunityFragment : Fragment(), dialogSquare.FinishedDialogSquare{
 
         }
 
+
+
         communityViewModel.getAllPublication()
 
         communityBinding.addForoButton.setOnClickListener {
@@ -62,7 +65,7 @@ class CommunityFragment : Fragment(), dialogSquare.FinishedDialogSquare{
         val manager = LinearLayoutManager(this@CommunityFragment.requireContext())
         val decorator =
             DividerItemDecoration(this@CommunityFragment.requireContext(), manager.orientation)
-        communityAdapter = CommunityAdapter(communityList) {onItemSelected(it) }
+        communityAdapter = CommunityAdapter(communityList,{onItemSelected(it)},{onItemSelectedIndicator(it)})
         communityBinding.CommunityAvailable.apply {
             layoutManager = manager
             adapter = communityAdapter
@@ -88,6 +91,11 @@ class CommunityFragment : Fragment(), dialogSquare.FinishedDialogSquare{
 
     private fun onItemSelected(community: ComunityObject) {
         communityViewModel.updatePublication(community)
+    }
+
+    private fun onItemSelectedIndicator(result: Boolean){
+        if (!result) communityBinding.addForoButton.visibility=View.INVISIBLE
+        else communityBinding.addForoButton.visibility=View.VISIBLE
     }
 
     override fun ResultDialogSquare(result: String) {

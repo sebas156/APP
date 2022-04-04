@@ -27,8 +27,7 @@ class DietsViewModel : ViewModel() {
 
 
     fun loadMealsFromServer() {
-        //mealList.clear()
-        loadMealsFromServer.postValue(null)
+        mealList.clear()
         GlobalScope.launch(Dispatchers.IO) {
             val querySnapshot = serverFoodRepository.loadMeals()
 

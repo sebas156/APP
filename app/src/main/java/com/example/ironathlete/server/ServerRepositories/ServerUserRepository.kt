@@ -10,12 +10,14 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.tasks.await
 
 class ServerUserRepository {
 
     private var auth: FirebaseAuth = Firebase.auth
     private var db = Firebase.firestore
+    private var st = FirebaseStorage.getInstance().reference
 
     suspend fun registerUser(emailUser: String, passWordUser: String): String? {
         return try {

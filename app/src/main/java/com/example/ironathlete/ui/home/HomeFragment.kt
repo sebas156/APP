@@ -1,9 +1,11 @@
 package com.example.ironathlete.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -15,6 +17,7 @@ class HomeFragment : Fragment() {
     
     private lateinit var homeViewModel : HomeViewModel
     private lateinit var homeBinding: FragmentHomeBinding
+    var GALLERY_INTENT = 1
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,6 +35,12 @@ class HomeFragment : Fragment() {
         with(homeBinding){
            infoImageView.setImageResource(R.drawable.infoperfil)
             stadisticsImageView.setImageResource(R.drawable.estadistica)
+
+            profileImageView.setOnClickListener {
+                val intent = Intent(Intent.ACTION_PICK)
+                intent.type = "image/*"
+                ActivityResultContracts.StartActivityForResult(intent, GALLERY_INTENT)
+            }
 
             infoUserCardView.setOnClickListener{
                 findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToInfoUserFragment())

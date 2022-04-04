@@ -36,12 +36,6 @@ class HomeFragment : Fragment() {
            infoImageView.setImageResource(R.drawable.infoperfil)
             stadisticsImageView.setImageResource(R.drawable.estadistica)
 
-            profileImageView.setOnClickListener {
-                val intent = Intent(Intent.ACTION_PICK)
-                intent.type = "image/*"
-                ActivityResultContracts.StartActivityForResult(intent, GALLERY_INTENT)
-            }
-
             infoUserCardView.setOnClickListener{
                 findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToInfoUserFragment())
             }

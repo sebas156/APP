@@ -17,7 +17,7 @@
     <fragment
         android:id="@+id/muscleFragment"
         android:name="com.example.ironathlete.ui.muscle.MuscleFragment"
-        android:label="fragment_muscle"
+        android:label="@string/muscle"
         tools:layout="@layout/fragment_muscle">
         <action
             android:id="@+id/action_muscleFragment_to_exerciseFragment"
@@ -30,7 +30,7 @@
     <fragment
         android:id="@+id/exerciseFragment"
         android:name="com.example.ironathlete.ui.exerciseDetails.ExerciseFragment"
-        android:label="fragment_exercise"
+        android:label="@string/Ejercicio"
         tools:layout="@layout/exercise_fragment" >
         <argument
             android:name="exerciseInformation"
@@ -42,12 +42,12 @@
     <fragment
         android:id="@+id/communityFragment"
         android:name="com.example.ironathlete.ui.comunity.CommunityFragment"
-        android:label="fragment_community"
+        android:label="@string/social"
         tools:layout="@layout/fragment_community" />
     <fragment
         android:id="@+id/dietsFragment"
         android:name="com.example.ironathlete.ui.diets.DietsFragment"
-        android:label="fragment_diets"
+        android:label="@string/food"
         tools:layout="@layout/fragment_diets" >
         <action
             android:id="@+id/action_dietsFragment_to_detailMealFragment"
@@ -56,7 +56,7 @@
     <fragment
         android:id="@+id/detailMealFragment"
         android:name="com.example.ironathlete.ui.detailsMeal.DetailMealFragment"
-        android:label="fragment_detail_meal"
+        android:label="@string/detail"
         tools:layout="@layout/fragment_detail_meal" >
         <argument
             android:name="mealInformation"
@@ -68,7 +68,7 @@
     <fragment
         android:id="@+id/infoUserFragment"
         android:name="com.example.ironathlete.ui.infoUser.InfoUserFragment"
-        android:label="fragment_info_user"
+        android:label="Informacion del usuario"
         tools:layout="@layout/fragment_info_user" >
         <action
             android:id="@+id/action_infoUserFragment_to_homeFragment"

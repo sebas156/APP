@@ -75,7 +75,7 @@ class CommunityAdapter (
                             contentCommentsTestView.text=ans
                             community.comments?.add(ans)
                             numberCommentsTextView.text=community.comments?.size.toString()
-                            var total = ""
+                            var total = "RESPUESTAS: \n\n"
                             for(comment in community.comments!!){
                                 total+=comment+"\n\n"
                             }

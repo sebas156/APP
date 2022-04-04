@@ -149,7 +149,7 @@
             android:id="@+id/display_date_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="8dp"
             android:text="TextView"
             app:layout_constraintBottom_toBottomOf="@+id/date_label_text_view"
             app:layout_constraintStart_toEndOf="@+id/date_label_text_view"

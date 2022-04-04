@@ -55,4 +55,9 @@
     <string name="send">Enviar</string>
     <string name="answer">Responde!!</string>
     <string name="close">Cerrar</string>
+    <string name="muscle">Rutina</string>
+    <string name="food">Dieta</string>
+    <string name="social">Comunidad</string>
+    <string name="detail">Detalle</string>
+    <string name="Ejercicio">Ejercicio</string>
 </resources>
